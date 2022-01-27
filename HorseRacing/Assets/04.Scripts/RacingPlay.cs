@@ -1,0 +1,112 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class RacingPlay : MonoBehaviour
+{
+    #region 싱글톤패턴
+    // singleton(싱글톤)패턴
+    static public RacingPlay instance; // RacingPlay객체에 접근할수 있게 인스턴스
+
+    private void Awake()
+    {
+        if(instance == null) instance = this;
+    }
+    #endregion
+
+    private List<PlayerMove> list_PlayerMove = new List<PlayerMove>();
+    private List<Transform> list_FinishdePlayer = new List<Transform>();
+    [SerializeField] private List<Transform> list_WinPlatform = new List<Transform>();
+    private int totalPlayerNum;
+    private int grade;
+    [SerializeField] Transform goal;
+    private void Update()
+    {
+        CheckPlayerReachedToGoalAndStopMove();
+    }
+    public void Register(PlayerMove playerMove)
+    {
+        list_PlayerMove.Add(playerMove);
+        totalPlayerNum++;
+        Debug.Log($"{playerMove.gameObject.name} (이)가 등록 완료 되었습니다, 현재 총 등록수 : {list_PlayerMove.Count}");
+    }
+    public void StartRacing()
+    {
+        foreach(PlayerMove playerMove in list_PlayerMove)
+        {
+            playerMove.doMove = true;
+        }
+    }
+    private void CheckPlayerReachedToGoalAndStopMove()
+    {
+        PlayerMove tmpFinishedPlayerMove = null;
+        //플레이어가 목표지점에 도착했는지 체크
+        foreach (PlayerMove playerMove in list_PlayerMove)
+        {
+            if(playerMove.transform.position.z > goal.position.z)
+            {
+                tmpFinishedPlayerMove = playerMove;
+                break;
+            }
+        }
+        // 플레이어가 목표지점에 도달했을때
+        if(tmpFinishedPlayerMove != null)
+        {
+            tmpFinishedPlayerMove.doMove = false;
+            list_FinishdePlayer.Add(tmpFinishedPlayerMove.transform);
+            list_PlayerMove.Remove(tmpFinishedPlayerMove);
+        }
+        // 경주가 끝났다면 (모든 플레이어가 목표를 통과했을때)
+        if(list_FinishdePlayer.Count == totalPlayerNum)
+        {
+            // 1,2,3등은 단상위에 위치시키고, 카메라는 단상을 비추도록 한다.
+            for (int i = 0; i < list_WinPlatform.Count; i++)
+            {
+                list_FinishdePlayer[i].position = list_WinPlatform[i].position;
+            }
+        }
+    }
+    public Transform GetPlayerTransform(int index)
+    {
+        /*Transform tmpPlayerTransform = null;
+        if (index < list_PlayerMove.Count)
+        {
+            Transform tmpPlayerTransform = list_PlayerMove[index].transform;
+            return tmpPlayerTransform;
+        }
+        else
+        {
+            return null; // 아무것도 없는것을 반환한다
+        }*/
+
+        // 함수의 반환용 지역변수의 선언과 초기화는 함수의 가장 상단에 한다.
+        Transform tmpPlayerTransform = null; 
+        
+        // 함수내용 : 연산에 따라 반환용 지역변수에 값을 대입한다.
+        if (index < list_PlayerMove.Count)
+        {
+            tmpPlayerTransform = list_PlayerMove[index].transform;
+        }
+        // 함수의 가장 하단에는 반환용 지역변수를 반환한다.
+        return tmpPlayerTransform;
+    }
+    public Transform Get1GradePlayer()
+    {
+        Transform leader = list_PlayerMove[0].gameObject.GetComponent<Transform>();
+        float prevDistance = list_PlayerMove[0].distance;
+        foreach(PlayerMove playerMove in list_PlayerMove)
+        {
+            if(playerMove.distance > prevDistance)
+            {
+                prevDistance = playerMove.distance;
+                leader = playerMove.gameObject.GetComponent<Transform>();
+            }
+        }
+        return leader;
+    }
+
+    public int GetTotalPlayerNumber()
+    {
+        return list_PlayerMove.Count;
+    }
+}
