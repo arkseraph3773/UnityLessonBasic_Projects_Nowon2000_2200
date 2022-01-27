@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RacingPlay : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class RacingPlay : MonoBehaviour
     private int totalPlayerNum;
     private int grade;
     [SerializeField] Transform goal;
+    [SerializeField] Text grade1PlayerNameText;
     private void Update()
     {
         CheckPlayerReachedToGoalAndStopMove();
@@ -64,6 +66,11 @@ public class RacingPlay : MonoBehaviour
             {
                 list_FinishdePlayer[i].position = list_WinPlatform[i].position;
             }
+            CameraHandler.instance.MoveToPlatform();
+            // 1등 친구 이름 텍스트 업데이트
+            grade1PlayerNameText.text = list_FinishdePlayer[0].name;
+            /*grade1PlayerNameText.enabled = true;*/
+            grade1PlayerNameText.gameObject.SetActive(true);
         }
     }
     public Transform GetPlayerTransform(int index)

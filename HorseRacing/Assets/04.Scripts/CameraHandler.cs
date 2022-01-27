@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class CameraHandler : MonoBehaviour
 {
-    // 카메라가 1등에게 따라 붙게 하고싶다
-    //
-    // 필요한것
-    // 1. 카메라 자체의 Transform 컴포넌트
-    // 2. 경주마들의 Transform 컴포넌트
-    //
-    // 저걸로 뭘해야할까
-    // 1. 경주마들의 등수를 실시간으로 체크한다.
-    // 2. 1등말의 위치를 가져온다. 
-    // 3. 카메라의 위치를 1등말의 위치에다가 특정 거리만큼 떨어트린다.
+    #region 싱글톤
+    static public CameraHandler instance;
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+    }
+    #endregion
 
     Transform tr;
     /*public List<Transform> list_Player;
@@ -21,6 +18,7 @@ public class CameraHandler : MonoBehaviour
     Transform target;
     int targetIndex;
     public Vector3 offset;
+    [SerializeField] private Transform platformCamPoint;
     private void Start()
     {
         tr = this.gameObject.GetComponent<Transform>();
@@ -53,5 +51,11 @@ public class CameraHandler : MonoBehaviour
     public void SwitchTargetTo1Grade()
     {
         target = RacingPlay.instance.Get1GradePlayer();
+    }
+
+    public void MoveToPlatform()
+    {
+        tr.position = platformCamPoint.position;
+        tr.rotation = platformCamPoint.rotation;
     }
 }
