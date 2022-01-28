@@ -18,6 +18,7 @@ public class PlayerMove : MonoBehaviour
 
         Vector3 dir = new Vector3(h, 0, v).normalized;
         Vector3 deltaMove = dir * speed * Time.deltaTime; // 이동 변화량
+        // 속도의 단위 : (meter / sec) * (sec / frame)//델타벡터 = meter / frame //프레임당 움직인 벡터거리
         tr.Translate(deltaMove);
     }
 }
