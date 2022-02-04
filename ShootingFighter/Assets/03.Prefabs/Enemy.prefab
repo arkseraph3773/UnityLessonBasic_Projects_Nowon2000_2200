@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7335663859091232932}
   - component: {fileID: 7335663859091232931}
   - component: {fileID: -1059506023869237241}
+  - component: {fileID: 8372934732192373343}
   m_Layer: 12
   m_Name: Enemy
   m_TagString: Untagged
@@ -109,9 +110,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ca3a91f39693f45a92fa1ac77ab543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  score: 100
+  damage: 10
+  speed: 1
   destroyEffect: {fileID: 7229198741770732526, guid: 2c166a9b83561bc45b641555aec95cea, type: 3}
-  AIPercent: 30
+  AIPercent: 90
 --- !u!54 &-1059506023869237241
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -128,3 +131,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8372934732192373343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335663859091232930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72451a70d66c5b84692191b6e6851879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyDelay: 100

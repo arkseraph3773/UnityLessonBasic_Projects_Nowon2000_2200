@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private float score;
+    [SerializeField] private float damage;
     [SerializeField] private float speed;
     [SerializeField] private GameObject destroyEffect;
     Transform tr;
@@ -50,12 +52,28 @@ public class Enemy : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            Player player = collision.gameObject.GetComponent<Player>();
+            player.HP -= damage;
+            /*int HPint = (int)player.HP; // 형변환
+            player.HPText.text = HPInt.ToString();
+            player.HPSlider.value = player.HP / player.HPMax;*/ //쓰지마
+            // 파괴이펙트
+            GameObject effectGO = Instantiate(destroyEffect);
+            effectGO.transform.position = tr.position;
+            Destroy(this.gameObject);
+        }
+
         if(collision.gameObject.layer == LayerMask.NameToLayer("PlayerWeapon"))
         {
             // todo -> 파괴 이펙트
             GameObject effectGO = Instantiate(destroyEffect);
             effectGO.transform.position = tr.position;
-            Destroy(effectGO, 3f); //이펙트 사라지게 함 //안쓰고 프리팹에 DestroyThisAfterTime 넣어서 사용해도 됨
+
+            GameObject playerGO = GameObject.Find("Player");
+            playerGO.GetComponent<Player>().score += score;
+            //Destroy(effectGO, 3f); //이펙트 사라지게 함 //안쓰고 프리팹에 DestroyThisAfterTime 넣어서 사용해도 됨
 
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
