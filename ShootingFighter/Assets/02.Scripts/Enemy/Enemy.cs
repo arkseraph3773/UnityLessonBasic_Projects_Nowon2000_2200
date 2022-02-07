@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour
             effectGO.transform.position = tr.position;
 
             GameObject playerGO = GameObject.Find("Player");
-            playerGO.GetComponent<Player>().score += score;
+            playerGO.GetComponent<Player>().Score += score;
             //Destroy(effectGO, 3f); //이펙트 사라지게 함 //안쓰고 프리팹에 DestroyThisAfterTime 넣어서 사용해도 됨
 
             Destroy(collision.gameObject);
