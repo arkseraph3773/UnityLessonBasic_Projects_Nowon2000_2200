@@ -34,8 +34,9 @@ public class Player : MonoBehaviour
         set
         {
             m_score = value;
-            int scpreInt = (int)m_score;
-            scoreText.text = scpreInt.ToString();
+            int scoreInt = (int)m_score;
+            scoreText.text = scoreInt.ToString();
+            GameManager.instance.CheckScoreAndMoveStage(scoreInt);
         }
         get
         {
