@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
+    public float damage;
     Transform tr;
     private void Awake()
     {
@@ -19,5 +20,18 @@ public class Bullet : MonoBehaviour
     {
         Vector3 deltaMove = Vector3.forward * speed * Time.deltaTime;
         tr.Translate(deltaMove, Space.World); //  Space.World지우면 밑으로 내려감
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject == null)
+        {
+            return;
+        }
+
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            collision.gameObject.GetComponent<Enemy>().HP -= damage;
+            Destroy(this.gameObject);
+        }
     }
 }
