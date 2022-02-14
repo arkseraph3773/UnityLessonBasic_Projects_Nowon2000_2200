@@ -1,0 +1,40 @@
+-GameManager
+ㄴ currentTileIndex
+ㄴ previousTileIndex
+ㄴ diceNumInit
+ㄴ goldendiceNumInit
+ㄴ diceNum
+ㄴ goldendiceNum
+ㄴ TileInfos : List<TileInfo>
+ㄴ doIHaveToGoBack : bool //TileInfo_Back
+RollADice()
+CalcPlayerPassedStarTile()
+MovePlayer()
+CalcTilePosition()
+
+-Player
+ㄴ TileTransforms : List<Transform>
+ㄴ Move(targetPosition : Vector3)
+
+-TileInfo
+ㄴ Index
+ㄴ name
+ㄴ discription
+OnTIleEvent()
+
+
+-----------TileInfo 상속-----------------
+-TileInfo_Star
+ㄴ starValue
+OnTileEvent()
+
+-TileInfo_Dice
+OnTileEvent()
+
+-TileInfo_GoldenDice
+OnTileEvent()
+
+-TileInfo_Back
+OnTileEvent()
+-----------TileInfo 상속-----------------
+
