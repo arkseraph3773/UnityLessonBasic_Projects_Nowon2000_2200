@@ -1387,6 +1387,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8549680080915674500, guid: 1f8daef95413bc34cbdc795213468db8, type: 3}
+      propertyPath: HPText
+      value: 
+      objectReference: {fileID: 2137725505}
+    - target: {fileID: 8549680080915674500, guid: 1f8daef95413bc34cbdc795213468db8, type: 3}
+      propertyPath: HPSlider
+      value: 
+      objectReference: {fileID: 629086384}
+    - target: {fileID: 8549680080915674500, guid: 1f8daef95413bc34cbdc795213468db8, type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 212488735}
     - target: {fileID: 8549680080915674555, guid: 1f8daef95413bc34cbdc795213468db8, type: 3}
       propertyPath: m_RootOrder
       value: 2
