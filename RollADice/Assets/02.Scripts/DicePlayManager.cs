@@ -7,7 +7,6 @@ public class DicePlayManager : MonoBehaviour
 {
     static public DicePlayManager instance;
     private int currentTileIndex;
-    //private int previousTileIndex;
     private int _diceNum;
     public int diceNum // Awake 함수와 RollADice에서 이중초기화하는것을 방지하기 위해서 사용
     {
@@ -56,6 +55,9 @@ public class DicePlayManager : MonoBehaviour
         }
     }
     public Text starScoreText;
+
+    public Transform playerStartPoint;
+    public GameObject finishedPanel;
     private void Awake()
     {
         instance = this; //if(instance == null) instance = this;사용은 두종류의 매니저가 있을때
@@ -109,8 +111,11 @@ public class DicePlayManager : MonoBehaviour
             currentTileIndex = list_MapTile.Count + currentTileIndex;
         }
         Vector3 target = GetTilePosition(currentTileIndex);
+        
         Player.instance.Move(target);
         list_MapTile[currentTileIndex].GetComponent<TileInfo>().TileEvent();
+
+        CheckGameIsFinished();
     }
     private void CheckPlayerPassedStarTile(int previousIndex, int currentIndex)
     {
@@ -136,5 +141,42 @@ public class DicePlayManager : MonoBehaviour
     {
         Vector3 pos = list_MapTile[tileIndex].position;
         return pos;
+    }
+    private void CheckGameIsFinished()
+    {
+        int totalDiceNum = diceNum + goldenDiceNum;
+        if (totalDiceNum < 1)
+        {
+            // Finished Panel 활성화
+            finishedPanel.SetActive(true);
+        }
+    }
+    public void ReplayGame()
+    {
+        // 주사위 갯수 초기화
+        // 각 샛별칸 샛별값 초기화
+        // 플레이어 원위치
+        // 점수 초기화
+        // 인버스패널이면 원래패널로 돌려놓음
+        
+        diceNum = diceNumInit;
+        goldenDiceNum = goldenDiceNumInit;
+        // 샛별칸 값 초기화
+        foreach (Transform maptile in list_MapTile)
+        {
+            TileInfo_Star tileInfo_Star = null;
+            bool isExist = maptile.TryGetComponent(out tileInfo_Star);
+            if (isExist)
+            {
+                tileInfo_Star.starValue = 3;
+            }
+        }
+        // 플레이어 원위치
+        Player.instance.transform.position = playerStartPoint.position;
+        currentTileIndex = 0;
+        // 점수 초기화
+        starScore = 0;
+        // 주사위패널 초기화
+        DicePlayUI.instance.RollBackDicePanel();
     }
 }
