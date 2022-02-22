@@ -6,16 +6,21 @@ public class PlayerController : MonoBehaviour
 {
     Transform tr;
     Rigidbody2D rb;
+    BoxCollider2D col;
     public float moveSpeed;
     public float jumpForce;
-    public Transform groundDetectPoint;
-    public float groundMinDistance;
 
-    public bool isJumping;
+    PlayerState playerState;
+
+    // Detectors
+    PlayerGroundDetector groundDetector;
+
     private void Awake()
     {
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<BoxCollider2D>();
+        groundDetector = GetComponent<PlayerGroundDetector>();
     }
     void Update()
     {
@@ -23,28 +28,39 @@ public class PlayerController : MonoBehaviour
         float h = Input.GetAxis("Horizontal"); //좌우이동
         rb.position += new Vector2(h * moveSpeed * Time.deltaTime, 0);
 
-        // Jump
-        if (isJumping == false && Input.GetKeyDown(KeyCode.LeftAlt))
+        if (playerState != PlayerState.Jump && Input.GetKeyDown(KeyCode.LeftAlt))
         {
-            isJumping = true;
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            playerState = PlayerState.Jump;
         }
+        UpdatePlayerState();
+        Debug.Log(playerState);
+    }
 
-        Vector2 origin = groundDetectPoint.position;
-        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, groundMinDistance);
-        Collider2D hitCol = hit.collider;
-        if (hitCol != null)
+    void UpdatePlayerState()
+    {
+        switch (playerState)
         {
-            if (hitCol.gameObject.layer == LayerMask.NameToLayer("Ground"))
-            {
-                isJumping = false;
-            }
+            case PlayerState.Idle:
+                break;
+            case PlayerState.Run:
+                break;
+            case PlayerState.Jump:
+                if (groundDetector.isGrounded) //그라운드 체크 해서 idle 상태로 만드는 if문
+                {
+                    playerState = PlayerState.Idle;
+                }
+                break;
+            default:
+                break;
         }
     }
-    private void OnDrawGizmos()
+
+    enum PlayerState
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(groundDetectPoint.position, new Vector3(groundDetectPoint.position.x, groundDetectPoint.position.y - groundMinDistance, groundDetectPoint.position.z));
+        Idle,
+        Run,
+        Jump,
     }
 }
 // raycast 선을 쏴서 닿은 오브젝트들을 참조할수 있는 기능
