@@ -523,3 +523,6 @@ MonoBehaviour:
   playerState: 0
   jumpState: 0
   runState: 0
+  attackState: 0
+  dashState: 0
+  dashAttackState: 0
