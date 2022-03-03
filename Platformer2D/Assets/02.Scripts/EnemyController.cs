@@ -74,14 +74,9 @@ public class EnemyController : MonoBehaviour
         }
         return time;
     }
-    void Start()
-    {
-        
-    }
-    
     void Update()
     {
-        //  todo -> UpdateAI();
+        UpdateAI();
 
         if (move.x < 0)
         {
@@ -108,74 +103,77 @@ public class EnemyController : MonoBehaviour
     {
         if (autoFollow)
         {
-            Collider2D targetCol = Physics2D.OverlapCircle(rb.position, autoFollowRangeRadius , playerLayer);
+            Collider2D targetCol = Physics2D.OverlapCircle(rb.position, autoFollowRangeRadius, playerLayer);
             if (targetCol != null)
             {
                 aiState = AIState.FollowTarget;
             }
-            else
+        }
+        else
+        {
+            if (enemyState == EnemyState.Hurt)
             {
-                if (enemyState == EnemyState.Hurt)
-                {
-                    aiState = AIState.FollowTarget;
-                }
+                aiState = AIState.FollowTarget;
             }
-            switch (aiState)
-            {
-                case AIState.DecideRandomBehavior:
-                    aiStateTime = Random.Range(1f, 5f);
-                    aiStateTimeElapsed = 0f;
-                    aiState = (AIState)Random.Range(1, 4);
-                    break;
-                case AIState.TakeARest:
-                    if(aiStateTimeElapsed > aiStateTime)
-                    {
-                        aiState = AIState.DecideRandomBehavior;
-                    }
-                    aiStateTimeElapsed += Time.deltaTime;
-                    break;
-                case AIState.MoveLeft:
-                    if (aiStateTimeElapsed > aiStateTime)
-                    {
-                        aiState = AIState.DecideRandomBehavior;
-                    }
-                    else
-                    {
-                        move.x = -1;
-                    }
-                    aiStateTimeElapsed += Time.deltaTime;
-                    break;
-                case AIState.MoveRight:
-                    if (aiStateTimeElapsed > aiStateTime)
-                    {
-                        aiState = AIState.DecideRandomBehavior;
-                    }
-                    else
+        }
+        switch (aiState)
+        {
+            case AIState.DecideRandomBehavior:
+                aiStateTime = Random.Range(1f, 5f);
+                aiStateTimeElapsed = 0f;
+                aiState = (AIState)Random.Range(1, 4);
+                break;
+            case AIState.TakeARest:
+                if (aiStateTimeElapsed > aiStateTime)
+                {
+                    move.x = 0;
+                    aiState = AIState.DecideRandomBehavior;
+                }
+                aiStateTimeElapsed += Time.deltaTime;
+                break;
+            case AIState.MoveLeft:
+                if (aiStateTimeElapsed > aiStateTime)
+                {
+                    aiState = AIState.DecideRandomBehavior;
+                }
+                else
+                {
+                    move.x = -1;
+                }
+                aiStateTimeElapsed += Time.deltaTime;
+                break;
+            case AIState.MoveRight:
+                if (aiStateTimeElapsed > aiStateTime)
+                {
+                    aiState = AIState.DecideRandomBehavior;
+                }
+                else
+                {
+                    move.x = 1;
+                }
+                aiStateTimeElapsed += Time.deltaTime;
+                break;
+            case AIState.FollowTarget:
+                Collider2D targetCol = Physics2D.OverlapCircle(rb.position, autoFollowRangeRadius, playerLayer);
+                if (targetCol == null)
+                {
+                    aiState = AIState.DecideRandomBehavior;
+                }
+                else
+                {
+                    Transform targetTransform = targetCol.transform;
+                    if (targetTransform.position.x > rb.position.x + col.size.x)
                     {
                         move.x = 1;
                     }
-                    aiStateTimeElapsed += Time.deltaTime;
-                    break;
-                case AIState.FollowTarget:
-                    Collider2D targetCol = Physics2D.OverlapCircle(rb.position, autoFollowRangeRadius, playerLayer);
-                    if (targetCol == null)
-                        aiState = AIState.DecideRandomBehavior;
-                    else
+                    else if (targetTransform.position.x < rb.position.x - col.size.x)
                     {
-                        Transform targetTransform = targetCol.transform;
-                        if (targetTransform.position.x > rb.position.x + col.size.x)
-                        {
-                            move.x = 1;
-                        }
-                        else if(targetTransform.position.x < rb.position.x - col.size.x)
-                        {
-                            move.x = -1;
-                        }    
+                        move.x = -1;
                     }
-                    break;
-                default:
-                    break;
-            }
+                }
+                break;
+            default:
+                break;
         }
     }
     private void ChangeEnemyState(EnemyState stateToChange)
