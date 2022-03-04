@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     Vector2 move; // direction vector (방향 벡터), 여기서는 크기가 1이 넘어가도 사용함.
 
     int _direction;
-    int direction
+    public int direction
     {
         set
         {
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     public AttackState attackState;
     public DashState dashState;
     public DashAttackState dashAttackState;
+    public EdgeGrabState edgeGrabState;
     public bool isAttacking
     {
         get
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour
     }
     // Detectors
     PlayerGroundDetector groundDetector;
+    PlayerEdgeDetector edgeDetector;
 
     // animation
     Animator animator;
@@ -74,6 +76,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         groundDetector = GetComponent<PlayerGroundDetector>();
+        edgeDetector = GetComponent<PlayerEdgeDetector>();
         animator = GetComponentInChildren<Animator>();
 
         direction = directionlnit;
@@ -169,6 +172,13 @@ public class PlayerController : MonoBehaviour
             }
             ChangePlayerState(tmpStateToChange);
         }
+
+        //edge grab
+        if(edgeDetector.isDetected &&
+            playerState != PlayerState.EdgeGrab && Input.GetKey(KeyCode.UpArrow))
+        {
+            ChangePlayerState(PlayerState.EdgeGrab);
+        }
         UpdatePlayerState();
     }
     private void FixedUpdate()
@@ -202,6 +212,10 @@ public class PlayerController : MonoBehaviour
             case PlayerState.DashAttack:
                 dashAttackState= DashAttackState.Idle;
                 break;
+            case PlayerState.EdgeGrab:
+                edgeGrabState = EdgeGrabState.Idle;
+                rb.bodyType = RigidbodyType2D.Dynamic;
+                break;
             default:
                 break;
         }
@@ -222,6 +236,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.DashAttack:
                 dashAttackState = DashAttackState.PrepareToDashAttack;
+                break;
+            case PlayerState.EdgeGrab:
+                edgeGrabState = EdgeGrabState.PrepareToEdgeGrab;
                 break;
             default:
                 break;
@@ -248,6 +265,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.DashAttack:
                 UpdateDashAttackState();
+                break;
+            case PlayerState.EdgeGrab:
+                UpdateEdgeGrab();
                 break;
             default:
                 break;
@@ -311,7 +331,6 @@ public class PlayerController : MonoBehaviour
                         {
                             enemy.hp -= attackDamage;
                         }
-                        enemy.hp -= attackDamage;
                     }
                     attackState = AttackState.Attacked;
                 }
@@ -407,6 +426,29 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+    void UpdateEdgeGrab()
+    {
+        switch(edgeGrabState)
+        {
+            case EdgeGrabState.Idle:
+                break;
+            case EdgeGrabState.PrepareToEdgeGrab:
+                animator.Play("EdgeGrabIdle");
+                rb.bodyType = RigidbodyType2D.Kinematic;
+                move = Vector2.zero;
+                rb.velocity = Vector2.zero;
+                rb.position = edgeDetector.targetPlayerPos;
+                edgeGrabState = EdgeGrabState.Grabbed;
+                break;
+            case EdgeGrabState.Grabbing:
+                break;
+            case EdgeGrabState.Grabbed:
+                // do nothing
+                break;
+            default:
+                break;
+        }
+    }
     private bool IsChangeDirectionPossible()
     {
         bool isOK = false;
@@ -449,6 +491,7 @@ public class PlayerController : MonoBehaviour
         Attack,
         Dash,
         DashAttack,
+        EdgeGrab,
     }
     public enum JumpState
     {
@@ -483,5 +526,12 @@ public class PlayerController : MonoBehaviour
         PrepareToDashAttack,
         DashingAttacking,
         DashingAttacked,
+    }
+    public enum EdgeGrabState
+    {
+        Idle,
+        PrepareToEdgeGrab,
+        Grabbing,
+        Grabbed,
     }
 }

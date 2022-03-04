@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Player : MonoBehaviour
             if(tmpValue <= 0)
                 tmpValue = 0;
             _hp = tmpValue;
+            hpText.text = _hp.ToString();
+            hpBar.value = (float)_hp / hpMax;
         }
         get
         {
@@ -20,6 +23,8 @@ public class Player : MonoBehaviour
         }
     }
     public int hpMax;
+    public Slider hpBar;
+    public Text hpText;
     public bool invincible = false;
     public float invincibleTime = 0.5f;
     private void Awake()

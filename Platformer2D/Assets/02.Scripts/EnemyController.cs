@@ -291,12 +291,12 @@ public class EnemyController : MonoBehaviour
         Hurt,
         Die,
     }
-    public enum MoveState
+    /*public enum MoveState
     {
         Idle,
         PrepareToMove,
         Moving,
-    }
+    }*/
     public enum HurtState
     {
         Idle,
