@@ -5,15 +5,15 @@ using UnityEngine.Video;
 
 public class SongSelector : MonoBehaviour
 {
-    public static SongSelector Instance;
+    public static SongSelector instance;
     private void Awake()
     {
-        if(Instance != null)
+        if(instance != null)
         {
-            Destroy(Instance);
+            Destroy(instance);
         }
-        Instance = this;
-        DontDestroyOnLoad(Instance);
+        instance = this;
+        DontDestroyOnLoad(instance);
     }
     public bool isPlayable
     {

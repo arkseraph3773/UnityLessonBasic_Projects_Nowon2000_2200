@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     }
     public void TryPlay()
     {
-        if(SongSelector.Instance.isPlayable)
+        if(SongSelector.instance.isPlayable)
         {
             MoveSceneTo("Play");
             NextState();

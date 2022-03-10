@@ -58,10 +58,11 @@ public class NotesMaker : MonoBehaviour
     private void CreateNoteData(KeyCode keyCode)
     {
         NoteData noteData = new NoteData();
-        //float roundedTime = 100 * (float)Math.Round(vp.time, 2);
+
         float tmpTime = (float)vp.time * 1000;
         int tmpTimeInt = (int)tmpTime;
-        if (tmpTimeInt % 10 < 5)
+        Debug.Log(tmpTimeInt);
+        if (tmpTime % 10 < 5)
         {
             tmpTimeInt /= 10;
         }
@@ -70,11 +71,10 @@ public class NotesMaker : MonoBehaviour
             tmpTimeInt /= 10;
             tmpTimeInt++;
         }
-        
+        Debug.Log(tmpTimeInt);
         float roundedTime = (float)tmpTimeInt / 100;
-
-
-        //noteData.time = roundedTime;
+        Debug.Log(roundedTime);
+        noteData.time = roundedTime;
         noteData.keyCode = keyCode;
         songData.notes.Add(noteData);
         Debug.Log($"Created note {keyCode}");
