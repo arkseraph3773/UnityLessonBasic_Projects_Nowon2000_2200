@@ -32,13 +32,15 @@ public class EnemyMove : MonoBehaviour
             }
             else
             {
-                // hut player & destroy this
+                OnReachedToEnd();
             }
         }
         
         tr.Translate(dir * speed * Time.fixedDeltaTime, Space.World);
-
     }
-
+    private void OnReachedToEnd()
+    {
+        Destroy(gameObject);
+    }
     
 }
