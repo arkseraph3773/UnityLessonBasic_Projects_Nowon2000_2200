@@ -18,9 +18,25 @@ public class Node : MonoBehaviour
     private void OnMouseEnter()
     {
         rend.material.color = buildAvailableColor;
+        if (TowerViewPresenter.instance.isSelceted)
+        {
+            Transform previewTransform = TowerViewPresenter.instance.GetTowerPreviewObjectTransform();
+            previewTransform.gameObject.SetActive(true);
+            previewTransform.position = transform.position;
+        }
     }
     private void OnMouseExit()
     {
         rend.material.color = originColor;
+        /*if (TowerViewPresenter.instance.isSelceted)
+        {
+            Transform previewTransform = TowerViewPresenter.instance.GetTowerPreviewObjectTransform();
+            previewTransform.gameObject.SetActive(false);
+            previewTransform.position = transform.position;
+        }*/
+    }
+    private void OnMouseDown()
+    {
+        // build
     }
 }
