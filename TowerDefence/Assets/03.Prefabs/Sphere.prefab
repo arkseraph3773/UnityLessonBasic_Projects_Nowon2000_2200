@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3714094177917086707}
   - component: {fileID: 7927533299545052534}
   - component: {fileID: 6012624696388799584}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,5 +109,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPointIndex: 0
-  speed: 10
+  speed: 1
   nextWayPoint: {fileID: 0}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4350890073732204867}
   - component: {fileID: 7637163241103235800}
   - component: {fileID: 3047939294898519672}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,5 +109,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPointIndex: 0
-  speed: 10
+  speed: 1
   nextWayPoint: {fileID: 0}

@@ -10,42 +10,46 @@ public class ObjectPool : MonoBehaviour
     {
         get
         {
-            if(_instance == null)
-            {
+            if (_instance == null)
                 _instance = Instantiate(Resources.Load<ObjectPool>("ObjectPool"));
-            }
             return _instance;
         }
     }
     List<PoolElement> poolElements = new List<PoolElement>();
     List<GameObject> spawnedObjects = new List<GameObject>();
-    Dictionary<string, Queue<GameObject>> spawnedQueueDictionary = new Dictionary<string, Queue<GameObject>>();
+    Dictionary<string, Queue<GameObject>> spawnedQueueDictionrary = new Dictionary<string, Queue<GameObject>>();
 
     public void AddPoolElement(PoolElement poolElement)
     {
         poolElements.Add(poolElement);
         Debug.Log($"{poolElement.tag} is added on ObjectPool");
     }
+
     private void Start()
     {
+        StartCoroutine(E_Start());
+    }
+    IEnumerator E_Start()
+    {
+        yield return new WaitUntil(() => TowerAssets.instance != null);
         foreach (PoolElement poolElement in poolElements)
         {
-            spawnedQueueDictionary.Add(poolElement.tag, new Queue<GameObject>());
+            Debug.Log($"pool element registered : {poolElement.tag}");
+            spawnedQueueDictionrary.Add(poolElement.tag, new Queue<GameObject>());
             for (int i = 0; i < poolElement.size; i++)
             {
                 GameObject obj = CreateNewObject(poolElement.tag, poolElement.prefab);
                 ArrangePool(obj);
             }
         }
+
     }
 
     public static void ReturnToPool(GameObject obj)
     {
-        if(!instance.spawnedQueueDictionary.ContainsKey(obj.name))
-        {
+        if (!instance.spawnedQueueDictionrary.ContainsKey(obj.name))
             throw new Exception($"Pool doesn't include {obj.name}");
-        }
-        instance.spawnedQueueDictionary[obj.name].Enqueue(obj);
+        instance.spawnedQueueDictionrary[obj.name].Enqueue(obj);
     }
 
     public static int GetSpawnedObjectNumber(string tag)
@@ -53,21 +57,23 @@ public class ObjectPool : MonoBehaviour
         int count = 0;
         foreach (var go in instance.spawnedObjects)
         {
-            if(go.name == tag && go.activeSelf)
+            if (go.name == tag &&
+               go.activeSelf)
                 count++;
         }
         return count;
     }
-    public static GameObject SpawnFromPool(string tag, Vector3 position) => instance.Spawn(tag, position); //람다식 사용
+
+    public static GameObject SpawnFromPool(string tag, Vector3 position) =>
+        instance.Spawn(tag, position);
 
     private GameObject Spawn(string tag, Vector3 position)
     {
-        if(!spawnedQueueDictionary.ContainsKey(tag))
-        {
+        if (!spawnedQueueDictionrary.ContainsKey(tag))
             throw new Exception($"Pool doesn't contains {tag}");
-        }
-        Queue<GameObject> queue = spawnedQueueDictionary[tag];
-        if(queue.Count == 0)
+
+        Queue<GameObject> queue = spawnedQueueDictionrary[tag];
+        if (queue.Count == 0)
         {
             PoolElement poolElement = poolElements.Find(x => x.tag == tag);
             var obj = CreateNewObject(poolElement.tag, poolElement.prefab);
@@ -100,11 +106,9 @@ public class ObjectPool : MonoBehaviour
                 spawnedObjects.Insert(i, obj);
                 break;
             }
-            else if(transform.GetChild(i).name == obj.name)
-            {
+            else if (transform.GetChild(i).name == obj.name)
                 isSameNameExist = true;
-            }
-            else if(isSameNameExist)
+            else if (isSameNameExist)
             {
                 obj.transform.SetSiblingIndex(i);
                 spawnedObjects.Insert(i, obj);
