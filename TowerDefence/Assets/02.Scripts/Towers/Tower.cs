@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    public TowerInfo Info;
+    public TowerInfo info;
 
     private void OnDisable()
     {

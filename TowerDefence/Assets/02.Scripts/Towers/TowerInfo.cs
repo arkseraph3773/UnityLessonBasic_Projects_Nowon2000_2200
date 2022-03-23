@@ -4,7 +4,7 @@ using UnityEngine;
 public class TowerInfo : ScriptableObject
 {
     public TowerType type;
-    public int lever; //타워레벨
+    public int level; //타워레벨
     public int price; //가격
 }
 
