@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MachineGun1
   m_EditorClassIdentifier: 
   type: 0
-  lever: 1
+  level: 1
   price: 50

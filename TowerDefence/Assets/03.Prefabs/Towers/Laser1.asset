@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Laser1
   m_EditorClassIdentifier: 
   type: 2
-  lever: 1
+  level: 1
   price: 150

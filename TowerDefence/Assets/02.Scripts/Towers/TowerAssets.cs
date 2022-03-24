@@ -9,7 +9,7 @@ public class TowerAssets : MonoBehaviour
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 _instance = Instantiate(Resources.Load<TowerAssets>("TowerAssets"));
                 _instance.RegisterAllTowerToObjectPool();
@@ -22,7 +22,7 @@ public class TowerAssets : MonoBehaviour
 
     public void RegisterAllTowerToObjectPool()
     {
-        foreach(GameObject tower in towers)
+        foreach (GameObject tower in towers)
         {
             ObjectPool.instance.AddPoolElement(new PoolElement
             {
@@ -35,13 +35,21 @@ public class TowerAssets : MonoBehaviour
 
     public bool TryGetTowerName(TowerType type, int level, out string towerName)
     {
-        towerName = towers.Find(x => x.GetComponent<Tower>().info.type == type && x.GetComponent<Tower>().info.type == level).name;
-        return
+        towerName = string.Empty;
+        if(level < 4)
+        {
+            towerName = towers.Find(x => x.name == type.ToString() + level.ToString()).name;
+        }
+
+        /*towerName = towers.Find(x => (x.GetComponent<Tower>().info.type == type) &&
+                                (x.GetComponent<Tower>().info.level == level)).name; //람다식 사용*/
+        
+        return towerName != string.Empty ? true : false;
     }
 
-    public bool TryGetTowerInfoByName(string towerName, out TowerInfo towerInfo)
+    public bool TryGetTowerByName(string towerName, out Tower tower)
     {
-        towerInfo = towers.Find(x => x.name == towerName).GetComponent<Tower>().info;
-        return towerInfo == null ? true : false;
+        tower = towers.Find(x => x.name == towerName).GetComponent<Tower>(); //람다식 사용
+        return tower != null ? true : false;
     }
 }

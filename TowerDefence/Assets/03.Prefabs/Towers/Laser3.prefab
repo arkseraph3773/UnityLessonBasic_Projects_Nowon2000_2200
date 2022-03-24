@@ -45,7 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead5a43111fb62a4aac7ac3413ff2b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Info: {fileID: 11400000, guid: 7c33b2066dd9df3439c3f4b33678c4c0, type: 2}
+  info: {fileID: 11400000, guid: 7c33b2066dd9df3439c3f4b33678c4c0, type: 2}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 1048576
+  detectRange: 3
+  turretRotatePoint: {fileID: 3339182065499397538}
 --- !u!1001 &1782192792461451376
 PrefabInstance:
   m_ObjectHideFlags: 0

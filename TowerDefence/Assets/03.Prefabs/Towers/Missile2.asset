@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Missile2
   m_EditorClassIdentifier: 
   type: 1
-  lever: 2
+  level: 2
   price: 150
