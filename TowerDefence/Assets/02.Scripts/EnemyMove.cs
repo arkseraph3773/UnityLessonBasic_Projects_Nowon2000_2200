@@ -19,10 +19,7 @@ public class EnemyMove : MonoBehaviour
     {
         nextWayPoint = WayPoints.points[0]; // 첫번째 웨이포인트 
     }
-    private void OnDisable()
-    {
-        ObjectPool.ReturnToPool(gameObject);
-    }
+   
     private void FixedUpdate()
     {
         Vector3 targetPos = new Vector3(nextWayPoint.position.x, originPosY, nextWayPoint.position.z);
@@ -33,6 +30,7 @@ public class EnemyMove : MonoBehaviour
             if (WayPoints.TryGetNextWayPoint(wayPointIndex, out nextWayPoint))
             {
                 wayPointIndex++;
+                tr.LookAt(nextWayPoint);
             }
             else
             {
