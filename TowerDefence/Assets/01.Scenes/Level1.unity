@@ -15202,13 +15202,11 @@ MonoBehaviour:
       prefab: {fileID: 2494122742596076287, guid: b390a1b2988acbe4ca227366a50c4e9c, type: 3}
       size: 5
     spawnTimeGap: 2
-    done: 0
   - poolElement:
       tag: Sphere
       prefab: {fileID: 3664300414427203563, guid: 52f5065ab104e6249b913e38effd8662, type: 3}
       size: 5
     spawnTimeGap: 1
-    done: 0
 --- !u!4 &1772625073
 Transform:
   m_ObjectHideFlags: 0

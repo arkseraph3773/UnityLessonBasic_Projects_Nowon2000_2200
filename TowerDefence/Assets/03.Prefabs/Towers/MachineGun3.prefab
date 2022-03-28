@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8813483866807601863}
   - component: {fileID: 2814685981224671914}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: MachineGun3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,6 +54,7 @@ MonoBehaviour:
   target: {fileID: 0}
   damage: 20
   reloadTime: 0.5
+  reloadTimer: 0
 --- !u!1001 &1782192792461451376
 PrefabInstance:
   m_ObjectHideFlags: 0

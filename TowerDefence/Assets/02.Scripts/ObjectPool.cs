@@ -57,8 +57,7 @@ public class ObjectPool : MonoBehaviour
         int count = 0;
         foreach (var go in instance.spawnedObjects)
         {
-            if (go.name == tag &&
-               go.activeSelf)
+            if (go.name == tag && go.activeSelf)
                 count++;
         }
         return count;

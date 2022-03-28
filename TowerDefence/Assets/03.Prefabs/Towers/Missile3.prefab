@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8813483866807601863}
   - component: {fileID: 2309859670062267222}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Missile3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,11 +52,42 @@ MonoBehaviour:
   detectRange: 6
   turretRotatePoint: {fileID: 3339182065499397538}
   target: {fileID: 0}
+  missilePrefab: {fileID: 8288416619347130762, guid: 7f875c4b8454fe9439aa27f8dbfb0e6c, type: 3}
+  firePoints:
+  - {fileID: 5899492098491406397}
   damage: 45
-  missileSpeed: 0
-  attackDelay: 0
   reloadTime: 2
   reloadTimer: 0
+--- !u!1 &2793794069188339261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5899492098491406397}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5899492098491406397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2793794069188339261}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0012022133, y: 0.50000006, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3339182065499397538}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1782192792461451376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -148,7 +179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ca1b398fbc1a64abaaf160449dab6c93, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0012022133
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ca1b398fbc1a64abaaf160449dab6c93, type: 3}
       propertyPath: m_LocalPosition.y

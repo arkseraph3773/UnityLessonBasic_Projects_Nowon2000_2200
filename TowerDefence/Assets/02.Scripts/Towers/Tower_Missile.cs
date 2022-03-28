@@ -5,10 +5,8 @@ using UnityEngine;
 public class Tower_Missile : Tower
 {
     public GameObject missilePrefab;
-    public Transform firePoint;
+    public Transform[] firePoints;
     public int damage;
-    /*public float missileSpeed;
-    public float attackDelay;*/
     public float reloadTime;
     public float reloadTimer;
     public override void Update()
@@ -31,9 +29,11 @@ public class Tower_Missile : Tower
 
     private void Attack()
     {
-        //target.GetComponent<Enemy>().hp -= damage;
-        GameObject missile = Instantiate(missilePrefab, firePoint.position, Quaternion.identity);
-        Vector3 dir = (target.transform.position - missile.transform.position).normalized;
-        missile.GetComponent<Missile>().SetMoveVector(dir);
+        foreach (var firePoint in firePoints)
+        {
+            GameObject missile = Instantiate(missilePrefab, firePoint.position, Quaternion.identity);
+            Vector3 dir = (target.transform.position - missile.transform.position).normalized;
+            missile.GetComponent<Missile>().Setup(dir, target, damage);
+        }
     }
 }
