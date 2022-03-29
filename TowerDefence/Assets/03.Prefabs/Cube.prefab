@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPointIndex: 0
-  speed: 1
+  speed: 10
   nextWayPoint: {fileID: 0}
 --- !u!114 &929135836257983232
 MonoBehaviour:
