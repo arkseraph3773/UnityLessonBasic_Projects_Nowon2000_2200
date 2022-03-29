@@ -20,7 +20,12 @@ public class Buff_Slow : Buff
     {
         
         float tmpSpeed = targetSpeedOrigin * (1f - slowPercent / 100);
-        if (enemyMove.speed > tmpSpeed)
+        if(enemyMove != null && 
+            enemyMove.speed > tmpSpeed)
+        {
+
+        }
+        if ()
         {
             enemyMove.speed = tmpSpeed;
         }
