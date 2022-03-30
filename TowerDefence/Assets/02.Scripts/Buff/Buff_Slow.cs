@@ -23,10 +23,6 @@ public class Buff_Slow : Buff
         if(enemyMove != null && 
             enemyMove.speed > tmpSpeed)
         {
-
-        }
-        if ()
-        {
             enemyMove.speed = tmpSpeed;
         }
         return doBuff;

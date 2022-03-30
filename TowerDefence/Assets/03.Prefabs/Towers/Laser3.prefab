@@ -59,7 +59,7 @@ MonoBehaviour:
   firePoint: {fileID: 4770941461414333412}
   hitEffect: {fileID: 4445697366263012419}
   buffSlow: {fileID: 7248829482028568398}
-  damage: 6
+  damage: 4
   damageIncrementPercent: 40
 --- !u!114 &7248829482028568398
 MonoBehaviour:
