@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour 
+public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public static GameState gameState;
@@ -11,17 +11,17 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.StartGame;
     }
+
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
-            //DontDestroyOnLoad(gameObject);
         }
     }
     private void Update()
     {
-        switch(gameState)
+        switch (gameState)
         {
             case GameState.Idle:
                 break;
@@ -39,10 +39,10 @@ public class GameManager : MonoBehaviour
                 break;
             default:
                 break;
-
         }
     }
 }
+
 public enum GameState
 {
     Idle,
