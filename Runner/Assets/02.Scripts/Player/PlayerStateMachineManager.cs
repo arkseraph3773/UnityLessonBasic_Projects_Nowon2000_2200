@@ -11,6 +11,13 @@ public class PlayerStateMachineManager : MonoBehaviour
     private void Awake()
     {
         playerStateMachines = GetComponents<PlayerStateMachine>();
+        foreach (var playerStateMachine in playerStateMachines)
+        {
+            if(playerStateMachine.playerState == PlayerState.Idle)
+            {
+                currentMachine = playerStateMachine;
+            }
+        }
     }
 
     private void Update()
@@ -25,12 +32,17 @@ public class PlayerStateMachineManager : MonoBehaviour
     /// </summary>
     private void CompareKeyInput()
     {
+        //Debug.Log(playerStateMachines.Length);
         foreach (var machine in playerStateMachines)
         {
-            if (keyInput == machine.keyCode)
+            if (keyInput != KeyCode.None &&
+                keyInput == machine.keyCode)
             {
+                //Debug.Log("check machine execute ok!");
+                //Debug.Log($"{keyInput},{machine.keyCode}");
                 if (machine.IsExecuteOK())
                 {
+                    //Debug.Log("execute machine");
                     machine.Execute();
                     currentMachine = machine;
                     state = machine.playerState;
@@ -67,6 +79,7 @@ public class PlayerStateMachineManager : MonoBehaviour
                 machine.IsExecuteOK())
             {
                 // 실행
+                currentMachine.ForceStop();
                 machine.Execute();
                 currentMachine = machine;
                 state = machine.playerState;
