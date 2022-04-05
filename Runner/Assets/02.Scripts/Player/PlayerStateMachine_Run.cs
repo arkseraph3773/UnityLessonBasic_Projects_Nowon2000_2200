@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStateMachine_Run : PlayerStateMachine
 {
-    public override bool IsExecuteOK()
+    /*public override bool IsExecuteOK()
     {
         bool isOK = false;
         if(manager.state == PlayerState.Idle)
@@ -12,7 +12,7 @@ public class PlayerStateMachine_Run : PlayerStateMachine
             isOK = true;
         }
         return isOK;
-    }
+    }*/
 
     public override PlayerState UpdateState()
     {

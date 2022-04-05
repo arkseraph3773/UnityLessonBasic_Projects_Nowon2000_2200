@@ -25,7 +25,7 @@ public class PlayerStateMachine_Fall : PlayerStateMachine
     }
     public override PlayerState UpdateState()
     {
-        PlayerState nextState = playerState;
+        PlayerState nextPlayerState = playerState;
         switch(state)
         {
             case State.Idle:
@@ -43,11 +43,11 @@ public class PlayerStateMachine_Fall : PlayerStateMachine
                 }
                 break;
             case State.Finish:
-                nextState = PlayerState.Idle;
+                nextPlayerState = PlayerState.Run;
                 break;
             default:
                 break;
         }
-        return nextState;
+        return nextPlayerState;
     }
 }
