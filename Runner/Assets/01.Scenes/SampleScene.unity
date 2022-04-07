@@ -332,10 +332,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapMoveSpeed: 5
-  mapTiles:
-  - {fileID: 6148686524481532610, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
-  - {fileID: 6209641062055070213, guid: 2ab139a183f3a5e46a669b5e2e321538, type: 3}
-  - {fileID: 4922949847212954484, guid: 8c5144c22777bc445a10d0eb5b5a5404, type: 3}
+  mapTileElements:
+  - tag: MapTile1
+    prefab: {fileID: 6650814463158221418, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
+    size: 10
+  - tag: MapTile2
+    prefab: {fileID: 1554240398710329167, guid: 2ab139a183f3a5e46a669b5e2e321538, type: 3}
+    size: 10
+  - tag: MapTile3
+    prefab: {fileID: 5569019354215979996, guid: 8c5144c22777bc445a10d0eb5b5a5404, type: 3}
+    size: 10
   map: {fileID: 1561575765}
 --- !u!4 &526533314
 Transform:
@@ -497,7 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   playerState: 0
-  keyCode: 97
+  keyCode: 0
   animator: {fileID: 0}
   manager: {fileID: 0}
 --- !u!4 &907512251
@@ -894,7 +900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6650814463158221418, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
       propertyPath: m_Name
-      value: MapTile1 (3)
+      value: MapTile1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
@@ -956,7 +962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6650814463158221418, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
       propertyPath: m_Name
-      value: MapTile1 (8)
+      value: MapTile1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
@@ -1091,7 +1097,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6650814463158221418, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
       propertyPath: m_Name
-      value: MapTile1 (7)
+      value: MapTile1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
@@ -1197,7 +1203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6650814463158221418, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
       propertyPath: m_Name
-      value: MapTile1 (1)
+      value: MapTile1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
@@ -1259,7 +1265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6650814463158221418, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
       propertyPath: m_Name
-      value: MapTile1 (6)
+      value: MapTile1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
@@ -1321,7 +1327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6650814463158221418, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
       propertyPath: m_Name
-      value: MapTile1 (5)
+      value: MapTile1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
@@ -1330,3 +1336,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6148686524481532610, guid: 7e372be539030a046a11adbf5ef9e6ff, type: 3}
   m_PrefabInstance: {fileID: 2039259675}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8827048445099481782
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4705001740086105291, guid: 2446e149da9b6db40a5baba8fd8c817d, type: 3}
+      propertyPath: m_Name
+      value: Postion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6634887212085742195, guid: 2446e149da9b6db40a5baba8fd8c817d, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6634887212085742195, guid: 2446e149da9b6db40a5baba8fd8c817d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6634887212085742195, guid: 2446e149da9b6db40a5baba8fd8c817d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 6634887212085742195, guid: 2446e149da9b6db40a5baba8fd8c817d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6634887212085742195, guid: 2446e149da9b6db40a5baba8fd8c817d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6634887212085742195, guid: 2446e149da9b6db40a5baba8fd8c817d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6634887212085742195, guid: 2446e149da9b6db40a5baba8fd8c817d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6634887212085742195, guid: 2446e149da9b6db40a5baba8fd8c817d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6634887212085742195, guid: 2446e149da9b6db40a5baba8fd8c817d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6634887212085742195, guid: 2446e149da9b6db40a5baba8fd8c817d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6634887212085742195, guid: 2446e149da9b6db40a5baba8fd8c817d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2446e149da9b6db40a5baba8fd8c817d, type: 3}

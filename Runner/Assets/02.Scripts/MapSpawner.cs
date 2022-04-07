@@ -10,11 +10,12 @@ public class MapSpawner : MonoBehaviour
     public static MapSpawner instance;
     public float mapMoveSpeed = 5f; //맵의 이동속도
 
-    [SerializeField] List<Transform> mapTiles; // 생성할 맵타일 프리팹 목록
+    [SerializeField] List<PoolElement> mapTileElements; // 생성할 맵타일 풀요소 목록
     [SerializeField] Transform map; // 맵타일의 부모 Transform
     // LinkedList : List의 요소가 다른 요소를 멤버로 가지는 형태의 리스트
-    [SerializeField] LinkedList<Transform> spawnedMapTiles = new LinkedList<Transform>(); // 생성된 맵타일 목록
+    [SerializeField] LinkedList<GameObject> spawnedMapTiles = new LinkedList<GameObject>(); // 생성된 맵타일 목록
 
+    
 
     /// <summary>
     /// 첫번째 맵타일을 삭제하고
@@ -22,7 +23,7 @@ public class MapSpawner : MonoBehaviour
     /// </summary>
     public static void RemoveFirstAndSpawnNew()
     {
-        Destroy(instance.spawnedMapTiles.First().gameObject); // 첫번째 맵타일 게이ㅣㅁ오브젝트 파괴
+        ObjectPool.ReturnToPool(instance.spawnedMapTiles.First().gameObject); // 첫번째 맵타일을 오브젝트 풀에 반환
         instance.spawnedMapTiles.RemoveFirst(); // 첫번째 맵타일을 리스트에서 제거
         instance.SpawnRandomMapTile(); // 랜덤 맵타일 제일 마지막에 생성
     }
@@ -35,7 +36,20 @@ public class MapSpawner : MonoBehaviour
     {
         instance = this;
         for (int i = 0; i < map.childCount; i++)
-            spawnedMapTiles.AddLast(map.GetChild(i));
+        {
+            spawnedMapTiles.AddLast(map.GetChild(i).gameObject);
+        }
+
+        foreach (var poolElement in mapTileElements)
+        {
+            ObjectPool.instance.AddPoolElement(poolElement);
+        }                
+
+    }
+
+    private void Start()
+    {
+        ObjectPool.InstantiateAllElements();
     }
 
     private void FixedUpdate()
@@ -48,7 +62,7 @@ public class MapSpawner : MonoBehaviour
     private void MoveMapTiles()
     {
         foreach (var maptile in spawnedMapTiles)
-            maptile.position += Vector3.back * mapMoveSpeed * Time.fixedDeltaTime;
+            maptile.transform.position += Vector3.back * mapMoveSpeed * Time.fixedDeltaTime;
     }
 
     /// <summary>
@@ -58,14 +72,12 @@ public class MapSpawner : MonoBehaviour
     /// </summary>
     private void SpawnRandomMapTile()
     {
-        int randomIndex = Random.Range(0, mapTiles.Count);
-        Transform lastMapTile = spawnedMapTiles.Last(); // 마지막 맵타일
+        int randomIndex = Random.Range(0, mapTileElements.Count);
+        Transform lastMapTile = spawnedMapTiles.Last().transform; // 마지막 맵타일
         float lastMapTileLength = lastMapTile.GetComponent<BoxCollider>().size.z; // 마지막 맵타일 길이
-        float currentMapTileLength = mapTiles[randomIndex].GetComponent<BoxCollider>().size.z; // 새로 생성할 맵타일 길이
+        float currentMapTileLength = mapTileElements[randomIndex].prefab.GetComponent<BoxCollider>().size.z; // 새로 생성할 맵타일 길이
         Vector3 spawnPos = lastMapTile.position + Vector3.forward * ((lastMapTileLength + currentMapTileLength) / 2); // 새로생성할 위치
-        Transform spawnedMapTile = Instantiate(mapTiles[randomIndex],
-                                               spawnPos,
-                                               Quaternion.identity);
+        GameObject spawnedMapTile = ObjectPool.SpawnFromPool(mapTileElements[randomIndex].tag, spawnPos);
         spawnedMapTiles.AddLast(spawnedMapTile); // 새로생성한 맵타일을 LinkedList에 등록
     }
 

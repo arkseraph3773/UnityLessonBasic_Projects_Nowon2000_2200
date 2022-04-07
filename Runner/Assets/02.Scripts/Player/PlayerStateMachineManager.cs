@@ -6,6 +6,7 @@ public class PlayerStateMachineManager : MonoBehaviour
     public PlayerState state;
     PlayerStateMachine[] playerStateMachines;
     PlayerStateMachine currentMachine;
+    PlayerStateMachine wallRunMachine;
     KeyCode keyInput;
 
     PlayerPos _playerPos;
@@ -72,6 +73,7 @@ public class PlayerStateMachineManager : MonoBehaviour
                 currentMachine = playerStateMachine;
             }
         }
+        wallRunMachine = GetComponent<PlayerStateMachine>();
     }
 
     private void Update()
@@ -106,14 +108,16 @@ public class PlayerStateMachineManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            if(wallRunMachine.IsExecuteOK())
+            {
+                currentMachine = wallRunMachine;
+            }
             playerPos = PlayerPos.Left;
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             playerPos = PlayerPos.Right;
         }
-
-        //Debug.Log(playerStateMachines.Length);
         foreach (var machine in playerStateMachines)
         {
             if (keyInput != KeyCode.None &&
