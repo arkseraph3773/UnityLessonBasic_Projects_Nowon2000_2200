@@ -135,8 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec2fbb87a3ab084a94c4c0820572285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  gravity: 9.81
+  moveSpeed: 5
+  gravity: 0.8
 --- !u!143 &89288024
 CharacterController:
   m_ObjectHideFlags: 0
@@ -516,7 +516,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5734335901067545202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.779, y: 0, z: 2.23}
+  m_LocalPosition: {x: 69.5, y: 0, z: 48.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1783722429}
@@ -537,7 +537,9 @@ GameObject:
   - component: {fileID: 5734335901067545203}
   - component: {fileID: 89288023}
   - component: {fileID: 5734335901067545205}
+  - component: {fileID: 5734335901067545206}
   - component: {fileID: 5734335901067545204}
+  - component: {fileID: 5734335901067545207}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -575,7 +577,8 @@ MonoBehaviour:
   state: 0
   manager: {fileID: 0}
   playerAnimator: {fileID: 0}
-  deltaMove: 2
+  controller: {fileID: 0}
+  deltaMove: 80
 --- !u!114 &5734335901067545205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,3 +591,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f7b295e5134c24ba2b06eb2db613b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5734335901067545206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734335901067545202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9adb4ddc6fcd3304cae9d94a218ba3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerState: 1
+  state: 0
+  manager: {fileID: 0}
+  playerAnimator: {fileID: 0}
+  controller: {fileID: 0}
+--- !u!114 &5734335901067545207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734335901067545202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbfc1da2ac22afd4d996f8b447f2ee31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerState: 3
+  state: 0
+  manager: {fileID: 0}
+  playerAnimator: {fileID: 0}
+  controller: {fileID: 0}
