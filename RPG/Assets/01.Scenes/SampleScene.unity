@@ -625,3 +625,4 @@ MonoBehaviour:
   manager: {fileID: 0}
   playerAnimator: {fileID: 0}
   controller: {fileID: 0}
+  comboTerm: 0.1

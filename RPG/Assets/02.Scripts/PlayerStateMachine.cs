@@ -60,7 +60,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public virtual void ForceStop()
     {
-
+        state = State.Idle;
     }
 
     public enum State
