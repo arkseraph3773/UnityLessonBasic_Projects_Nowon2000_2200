@@ -22,6 +22,7 @@ public class PlayerStateMachine_Move : PlayerStateMachine
             case State.Idle:
                 break;
             case State.Prepare:
+                playerAnimator.SetTrigger("doMove");
                 state++;
                 break;
             case State.Casting:

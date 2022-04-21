@@ -8,24 +8,25 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
     private float combo1Time;
     private float combo2Time;
     private float combo3Time;
-    private float combo4Time;
     private float comboTime;
     private float comboTimer;
     private int comboCount;
     private Coroutine comboCoroutine = null;
-
-    
 
     private void Start()
     {
         combo1Time = playerAnimator.GetClipTime("Attack_Combo1");
         combo2Time = playerAnimator.GetClipTime("Attack_Combo2");
         combo3Time = playerAnimator.GetClipTime("Attack_Combo3");
-        combo4Time = playerAnimator.GetClipTime("Attack_Combo4");
     }
+
     public override bool IsExecuteOK()
     {
-        return true;
+        if (comboCount == 0 &&
+            (manager.playerState == PlayerState.Move &&
+             playerAnimator.IsClipPlaying("Movement")))
+            return true;
+        return false;
     }
 
     public override PlayerState Workflow()
@@ -37,73 +38,91 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
             case State.Idle:
                 break;
             case State.Prepare:
-                
-                // 콤보중이면 콤보 카운트 업
-                if (playerAnimator.GetBool("attackComboOn") &&
-                    comboCount > 3)
-                    comboCount++;
-                else
-                    comboCount = 0;
-                playerAnimator.SetInt("attackComboCount", comboCount);
-
-
-                // 콤보 코루틴 실행중이면 중지
-                if (comboCoroutine != null)
-                    StopCoroutine(comboCoroutine);
-
-                // 콤보 상태 끔
-                playerAnimator.SetBool("attackComboOn", false);
-
-                //현재 콤보 단계의 애니메이션의 시간 초기화
                 comboTimer = comboTime = GetComboTime();
-
-                // 공격 애니메이션 시작
                 playerAnimator.SetTrigger("doAttack");
                 state++;
                 break;
             case State.Casting:
-                if (comboCount < 3)
-                    playerAnimator.SetBool("attackComboOn", true);
-                state++;
-                break;
-            case State.OnAction:
-                if (comboTimer < 0)
+
+                if (playerAnimator.IsClipPlaying(GetClipName()))
                 {
-                    if (comboCount < 3)
-                    {
-                        comboCoroutine = StartCoroutine(E_ComboOff());
-                    }
+                    comboCount++;
+                    playerAnimator.SetInt("attackComboCount", comboCount);
                     state++;
                 }
                 else
-                    comboTimer -= Time.deltaTime;
+                {
+                    Debug.Log($"stocked : casting on {GetClipName()}, combo count {comboCount}");
+                }
+                break;
+            case State.OnAction:
+
+                // 마우스입력 들어오면 그다음 콤보 실행 
+                // 안들어오면 무브먼트로 돌아감
+
+                if (Input.GetMouseButton(0))
+                {
+                    if (comboTimer < 0.6f &&
+                        comboCount < 3)
+                    {
+                        state = State.Prepare;
+                    }
+                }
+
+                if (comboTimer < 0.5f)
+                {
+                    if (state != State.Prepare)
+                        state++;
+                }
                 break;
             case State.Finish:
                 nextState = PlayerState.Move;
                 break;
             default:
                 break;
-
         }
+
+        //Debug.Log(comboTimer);
+        comboTimer -= Time.deltaTime;
         return nextState;
     }
-    private float GetComboTime()
+
+    public override void ForceStop()
     {
-        if (comboCount == 1)
-            return combo2Time;
-        else if(comboCount == 2)
-            return combo3Time;
-        else if (comboCount == 3)
-            return combo4Time;
-        else
-            return combo1Time;
+        base.ForceStop();
+        comboCount = 0;
+        playerAnimator.SetInt("attackComboCount", comboCount);
     }
 
-    private IEnumerator E_ComboOff()
+    private float GetComboTime()
     {
-        
-        yield return new WaitForSeconds(comboTerm);
-        playerAnimator.SetBool("attackComboOn", false);
+        if (comboCount == 0)
+            return combo1Time;
+        else if (comboCount == 1)
+            return combo2Time;
+        else if (comboCount == 2)
+            return combo3Time;
+        else
+        {
+            Debug.LogError("Attack machine : 콤보 애니메이션 시간을 가져오는데 문제가 있습니다.");
+            return -1f;
+        }
     }
+
+    private string GetClipName()
+    {
+        if (comboCount == 0)
+            return "Attack_Combo1";
+        else if (comboCount == 1)
+            return "Attack_Combo2";
+        else if (comboCount == 2)
+            return "Attack_Combo3";
+        else
+        {
+            Debug.LogError("Attack machine : 콤보 애니메이션 이름을 가져오는데 문제가 있습니다.");
+            return "";
+        }
+    }
+
 
 }

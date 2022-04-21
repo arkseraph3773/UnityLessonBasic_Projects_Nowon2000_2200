@@ -578,7 +578,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   playerAnimator: {fileID: 0}
   controller: {fileID: 0}
-  deltaMove: 80
+  deltaMove: 50
 --- !u!114 &5734335901067545205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,4 +625,4 @@ MonoBehaviour:
   manager: {fileID: 0}
   playerAnimator: {fileID: 0}
   controller: {fileID: 0}
-  comboTerm: 0.1
+  comboTerm: 1

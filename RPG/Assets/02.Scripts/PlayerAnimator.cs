@@ -13,31 +13,33 @@ public class PlayerAnimator : MonoBehaviour
 
     public bool GetBool(string name) =>
         animator.GetBool(name);
-    
+
     public float GetFloat(string name) =>
         animator.GetFloat(name);
 
-    /*public int GetInt(string name) =>
-        animator.*/
+    public int GetInt(string name) =>
+        animator.GetInteger(name);
+
     public void SetTrigger(string name) =>
         animator.SetTrigger(name);
+
     public void SetFloat(string name, float value) =>
         animator.SetFloat(name, value);
 
     public void SetInt(string name, int value) =>
         animator.SetInteger(name, value);
-    public void SetBool(string name, bool value) =>
-       animator.SetBool(name, value);
 
-    public void Play(string name) => 
+    public void SetBool(string name, bool value) =>
+        animator.SetBool(name, value);
+
+    public void Play(string name) =>
         animator.Play(name);
+
     public bool IsClipPlaying(string name)
     {
         var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName(name))
-        {
             return true;
-        }
         return false;
     }
 
@@ -47,10 +49,7 @@ public class PlayerAnimator : MonoBehaviour
         for (int i = 0; i < ac.animationClips.Length; i++)
         {
             if (ac.animationClips[i].name == name)
-            {
                 return ac.animationClips[i].length;
-            }
-            
         }
         return -1.0f;
     }
