@@ -20,15 +20,15 @@ TagManager:
   - 
   - 
   - 
-  - Vehicles
-  - 
-  - Environment
   - 
   - 
+  - Item
+  - ItemCollision
   - 
   - 
   - 
-  - Terrain
+  - Ground
+  - 
   - Enemy
   - 
   - 
