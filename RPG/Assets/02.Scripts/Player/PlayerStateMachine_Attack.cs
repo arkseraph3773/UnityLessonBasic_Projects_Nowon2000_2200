@@ -12,6 +12,14 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
     private float comboTimer;
     private int comboCount;
     private Coroutine comboCoroutine = null;
+    public float damage = 10f;
+    private Weapon weapon;
+
+    public override void Awake()
+    {
+        base.Awake();
+        weapon = GetComponentInChildren<Weapon>();
+    }
 
     private void Start()
     {
@@ -40,6 +48,7 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
             case State.Prepare:
                 comboTimer = comboTime = GetComboTime();
                 playerAnimator.SetTrigger("doAttack");
+                weapon.damage = damage;
                 state++;
                 break;
             case State.Casting:
@@ -52,7 +61,7 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
                 }
                 else
                 {
-                    Debug.Log($"stocked : casting on {GetClipName()}, combo count {comboCount}");
+                    //Debug.Log($"stocked : casting on {GetClipName()}, combo count {comboCount}");
                 }
                 break;
             case State.OnAction:
@@ -65,6 +74,7 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
                     if (comboTimer < 0.6f &&
                         comboCount < 3)
                     {
+                        weapon.damage = 0;
                         state = State.Prepare;
                     }
                 }
@@ -72,7 +82,10 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
                 if (comboTimer < 0.5f)
                 {
                     if (state != State.Prepare)
+                    {
+                        weapon.damage = 0;
                         state++;
+                    }
                 }
                 break;
             case State.Finish:
@@ -104,7 +117,7 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
             return combo3Time;
         else
         {
-            Debug.LogError("Attack machine : 콤보 애니메이션 시간을 가져오는데 문제가 있습니다.");
+            //Debug.LogError("Attack machine : 콤보 애니메이션 시간을 가져오는데 문제가 있습니다.");
             return -1f;
         }
     }
@@ -119,7 +132,7 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
             return "Attack_Combo3";
         else
         {
-            Debug.LogError("Attack machine : 콤보 애니메이션 이름을 가져오는데 문제가 있습니다.");
+            //Debug.LogError("Attack machine : 콤보 애니메이션 이름을 가져오는데 문제가 있습니다.");
             return "";
         }
     }
