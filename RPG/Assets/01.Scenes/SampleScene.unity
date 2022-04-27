@@ -1709,7 +1709,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 0}
   controller: {fileID: 0}
   comboTerm: 1
-  damage: 10
+  damage: 60
 --- !u!114 &5734335901067545208
 MonoBehaviour:
   m_ObjectHideFlags: 0
