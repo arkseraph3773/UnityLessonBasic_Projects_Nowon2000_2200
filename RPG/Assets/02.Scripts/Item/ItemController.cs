@@ -101,6 +101,7 @@ public class ItemController : MonoBehaviour
 
     IEnumerator E_PickUpEffect(Player player)
     {
+        doFloatingEffect = false;
         rb.velocity = Vector3.zero;
         rb.AddForce(Vector3.up * popForce, ForceMode.Impulse);
         yield return new WaitForEndOfFrame();
