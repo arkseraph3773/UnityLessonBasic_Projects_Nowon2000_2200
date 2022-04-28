@@ -89,6 +89,8 @@ public class ItemController : MonoBehaviour
             if(grounds.Length > 0)
             {
                 doFloatingEffect = true;
+                rb.velocity = Vector3.zero;
+                break;
             }
 
             rendererTransform.Rotate(new Vector3(rotateSpeed * Time.deltaTime, 0f, rotateSpeed * Time.deltaTime));
