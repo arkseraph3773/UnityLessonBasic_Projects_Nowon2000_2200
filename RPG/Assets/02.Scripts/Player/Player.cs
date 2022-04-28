@@ -60,4 +60,12 @@ public class Player : MonoBehaviour
         _hp = hpMax;
         _mp = mpMax;
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
+        {
+            other.gameObject.GetComponent<ItemController>().PickUp(this);
+        }
+    }
 }

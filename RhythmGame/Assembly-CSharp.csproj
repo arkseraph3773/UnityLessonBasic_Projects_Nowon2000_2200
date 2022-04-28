@@ -57,13 +57,13 @@
     <Compile Include="Assets\02.Scripts\SongData.cs" />
     <Compile Include="Assets\02.Scripts\NoteData.cs" />
     <Compile Include="Assets\02.Scripts\Note.cs" />
+    <Compile Include="Assets\02.Scripts\NoteHitter.cs" />
+    <Compile Include="Assets\02.Scripts\ScoreUI.cs" />
     <Compile Include="Assets\02.Scripts\GameManager.cs" />
     <Compile Include="Assets\02.Scripts\NoteManager.cs" />
     <Compile Include="Assets\02.Scripts\SongSelector.cs" />
     <Compile Include="Assets\02.Scripts\GamePlay.cs" />
     <Compile Include="Assets\02.Scripts\NoteSpawner.cs" />
-    <Compile Include="Assets\02.Scripts\NoteHitter.cs" />
-    <Compile Include="Assets\02.Scripts\ScoreUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
