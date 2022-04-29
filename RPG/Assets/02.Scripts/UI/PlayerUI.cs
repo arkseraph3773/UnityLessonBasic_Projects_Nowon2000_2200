@@ -15,6 +15,7 @@ public class PlayerUI : MonoBehaviour
 
     public void SetMPBar(float value) =>
         mpBar.value = value;
+
     private void Awake()
     {
         instance = this;

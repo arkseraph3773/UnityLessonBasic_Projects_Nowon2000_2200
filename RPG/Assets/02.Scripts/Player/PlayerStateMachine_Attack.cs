@@ -58,6 +58,7 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
                     comboCount++;
                     playerAnimator.SetInt("attackComboCount", comboCount);
 
+                    //Debug.Log($"Attack : detected target count: {weapon.GetTargets().Count}");
                     // 캐스팅 동안 무기에 닿은 모든 타겟 가져옴
                     foreach (var target in weapon.GetTargets())
                     {
@@ -79,7 +80,6 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
                     if (comboTimer < 0.6f &&
                         comboCount < 3)
                     {
-                        
                         state = State.Prepare;
                     }
                 }
@@ -88,7 +88,6 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
                 {
                     if (state != State.Prepare)
                     {
-                        
                         state++;
                     }
                 }

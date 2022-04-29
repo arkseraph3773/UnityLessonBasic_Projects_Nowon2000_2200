@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
             dropItems.Length <= 0)
             return;
 
-        Debug.Log("Enemy : Drop item");
+        //Debug.Log("Enemy : Drop item");
         // 드롭할 아이템
         Item tmpItem = dropItems[Random.Range(0, dropItems.Length)];
 

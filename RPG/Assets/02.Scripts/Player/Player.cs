@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        //Debug.Log(other.name);
         if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
         {
             other.gameObject.GetComponent<ItemController>().PickUp(this);
