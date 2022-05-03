@@ -250,3 +250,4 @@ MonoBehaviour:
   num: 0
   icon: {fileID: 0}
   _image: {fileID: 547107197283042289}
+  _numText: {fileID: 547107196625264746}

@@ -10,7 +10,7 @@ public class InventoryItemsView : MonoBehaviour
 
     private List<InventorySlot> slots = new List<InventorySlot>();
 
-    private void Start()
+    private void Awake()
     {
         SetUp();
     }
