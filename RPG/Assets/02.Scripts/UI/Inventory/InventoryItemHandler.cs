@@ -33,7 +33,7 @@ public class InventoryItemHandler : MonoBehaviour
     private void Update()
     {
         // 마우스 왼쪽버튼
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0)) // GetMouseButtonDown(0)
         {
             // 발생할 이벤트에 대한 마우스 이벤트 데이터
             _pointerEventData = new PointerEventData(_eventSystem); // 현재 이벤트에서 마우스 이벤트 데이터만 따로 생성
@@ -41,6 +41,7 @@ public class InventoryItemHandler : MonoBehaviour
 
             List<RaycastResult> results = new List<RaycastResult>(); // 레이캐스트 대상들
             _graphicRaycaster.Raycast(_pointerEventData, results); // UI 레이캐스트
+
 
             // UI 캐스트됨
             if (results.Count > 0)
@@ -52,27 +53,44 @@ public class InventoryItemHandler : MonoBehaviour
                     {
                         // 슬롯번호와 슬롯에 있는 아이템이름 같으면 아무것도 하지않음
                         if (_slot.id == slot.id &&
-                            _slot.itemName == slot.itemName)
+                            _slot.item.name == slot.item.name)
                         {
                             gameObject.SetActive(false);
                         }
                         // 캐스팅된 슬롯과 원래 슬롯을 스왑함
                         else
                         {
-                            //InventorySlot tmpSlot = _slot;
-                            Item oldItem = ItemAssets.GetItem(_slot.itemName);
-                            Item newItem = ItemAssets.GetItem(slot.itemName);
-                            _slot.SetUp(newItem, slot.num);
-                            slot.SetUp(oldItem, _slot.num);
-                            gameObject.SetActive(false);
+                            Item tmpItem = slot.item;
+                            int tmpNum = slot.num;
+                            slot.SetUp(_slot.item, _slot.num);
+                            _slot.SetUp(tmpItem, tmpNum);
+
+                            Clear();
                         }
                         break;
                     }
                 }
+            }   
+            // 필드에 마우스 왼쪽 클릭 했으므로 아이템 드롭
+            else
+            {
+                // 드롭할 아이템 드롭
+                GameObject tmpPrefab = ItemAssets.GetItemPrefab(_slot.item.name);
+                if (tmpPrefab != null)
+                {
+                    _slot.Clear();
+                    Instantiate(tmpPrefab, Player.instance.transform.position, Quaternion.identity);
+                }
+                Clear();
             }
         }
+        // 마우스 오른쪽 버튼
+        else if (Input.GetMouseButtonDown(1))
+        {
+            Clear();
+        }
     }
-
+    
    
 
     private void FixedUpdate()
@@ -84,5 +102,11 @@ public class InventoryItemHandler : MonoBehaviour
     {
         _slot = slot;
         _image.sprite = icon;
+    }
+
+    public void Clear()
+    {
+        SetUp(null, null);
+        gameObject.SetActive(false );
     }
 }

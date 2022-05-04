@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance;
+
     public float hpMax;
     private float _hp;
     public float hp
@@ -57,6 +59,7 @@ public class Player : MonoBehaviour
     
     private void Awake()
     {
+        instance = this;
         _hp = hpMax;
         _mp = mpMax;
     }
@@ -66,7 +69,10 @@ public class Player : MonoBehaviour
         //Debug.Log(other.name);
         if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
         {
-            other.gameObject.GetComponent<ItemController>().PickUp(this);
+            if (Input.GetKey(KeyCode.Z))
+            {
+                other.gameObject.GetComponent<ItemController>().PickUp(this);
+            }
         }
     }
 }
