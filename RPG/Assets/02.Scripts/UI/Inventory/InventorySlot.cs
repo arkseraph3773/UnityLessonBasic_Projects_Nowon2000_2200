@@ -32,8 +32,10 @@ public class InventorySlot : MonoBehaviour , IPointerDownHandler
             _num = value;
             if (_num > 1)
                 _numText.text = _num.ToString();
-            else
+            else if (_num == 1)
                 _numText.text = "";
+            else
+                Clear();
         }
         get
         {
@@ -62,12 +64,16 @@ public class InventorySlot : MonoBehaviour , IPointerDownHandler
     [SerializeField] private Image _image;
     [SerializeField] private Text _numText;
 
-    public void SetUp(Item _item, int _num)
+    public delegate void OnUse();
+    private OnUse dOnUse;
+
+    public void SetUp(Item _item, int _num, OnUse useEvent)
     {
         if (_item != null)
         {
             num = _num;
             item = _item;
+            dOnUse = useEvent;
         }
         else
         {
@@ -80,17 +86,30 @@ public class InventorySlot : MonoBehaviour , IPointerDownHandler
     {
         item = null;
         num = 0;
+        dOnUse = null;
     }
 
     
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (isItemExist &&
-            InventoryItemHandler.instance.gameObject.activeSelf == false)
+        if (isItemExist)
         {
-            InventoryItemHandler.instance.SetUp(this, _item.icon);
-            InventoryItemHandler.instance.gameObject.SetActive(true);
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                if (InventoryItemHandler.instance.gameObject.activeSelf == false)
+                {
+                    InventoryItemHandler.instance.SetUp(this, _item.icon);
+                    InventoryItemHandler.instance.gameObject.SetActive(true);
+                }
+            }
+            else if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                if (dOnUse != null)
+                {
+                    dOnUse();
+                }
+            }
         }
     }
 }
