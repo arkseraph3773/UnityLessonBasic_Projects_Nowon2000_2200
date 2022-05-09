@@ -63,8 +63,9 @@ public class InventoryItemHandler : MonoBehaviour
                         {
                             Item tmpItem = slot.item;
                             int tmpNum = slot.num;
-                            slot.SetUp(_slot.item, _slot.num);
-                            _slot.SetUp(tmpItem, tmpNum);
+                            InventorySlot.OnUse tmpOnUse = slot.dOnUse;
+                            slot.SetUp(_slot.item, _slot.num, _slot.dOnUse);
+                            _slot.SetUp(tmpItem, tmpNum, tmpOnUse);
 
                             Clear();
                         }

@@ -58,10 +58,13 @@ public class Player : MonoBehaviour
 
     public Transform weapon1Point;
 
+    [Header("¿Â∫Ò")]
+    public Weapon1 weapon1;
+
     public bool EquipWeapon1(GameObject weaponPrefab)
     {
         UnequipWeapon1();
-        Instantiate(weaponPrefab, weapon1Point);
+        weapon1 = Instantiate(weaponPrefab, weapon1Point).GetComponent<Weapon1>();
         
         return true;
     }
@@ -71,8 +74,8 @@ public class Player : MonoBehaviour
         if (weapon1Point.childCount > 0)
         {
             GameObject weapon1 = weapon1Point.GetChild(0).gameObject;
-            Item item = weapon1Point.GetComponent<Equipment>().item;
-            InventoryView.instance.GetItemView(ItemType.Equip).AddItem(item, 1);
+            ItemController_Equipment controller = weapon1.GetComponent<Equipment>().controller;
+            InventoryView.instance.GetItemView(ItemType.Equip).AddItem(controller.item, 1, controller.Use);
             Destroy(weapon1);
             return true;
         }
@@ -84,6 +87,9 @@ public class Player : MonoBehaviour
         instance = this;
         _hp = hpMax;
         _mp = mpMax;
+
+        //get equioments
+        weapon1 = GetComponentInChildren<Weapon1>();
     }
 
     private void OnTriggerStay(Collider other)

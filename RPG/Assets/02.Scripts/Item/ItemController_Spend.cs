@@ -1,13 +1,9 @@
 ﻿using UnityEngine;
-
-public class ItemController_Equipment : ItemController, IUseable
+public class ItemController_Spend : ItemController, IUseable
 {
-    public GameObject equipmentPrefab;
-
     public virtual void Use()
     {
-        InventoryView.instance.GetItemView(ItemType.Equip).Remove(item, 1);
-        
+        InventoryView.instance.GetItemView(ItemType.Spend).Remove(item, 1);
     }
     public override void PickUp(Player player)
     {

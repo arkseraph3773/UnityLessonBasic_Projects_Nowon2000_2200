@@ -92,9 +92,9 @@ GameObject:
   - component: {fileID: 1271083360198915309}
   - component: {fileID: 1271083360198915299}
   - component: {fileID: 1271083360198915308}
-  - component: {fileID: 6833356952905649715}
+  - component: {fileID: 684998352204228093}
   m_Layer: 16
-  m_Name: HPPosion
+  m_Name: MPPosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,7 +145,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6833356952905649715
+--- !u!114 &684998352204228093
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,10 +154,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1271083360198915298}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92b21ebf2a812314f8b12ca41c9f3717, type: 3}
+  m_Script: {fileID: 11500000, guid: baf6f766774d5fd4abaedf7bc17b920f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 065e8ec926709c3488051e3620799fa8, type: 2}
+  item: {fileID: 11400000, guid: 3d6a5e91d71fa6d488f5233266f9fb6f, type: 2}
   num: 98
   doFloatingEffect: 0
   floatingSpeed: 1
@@ -166,7 +166,7 @@ MonoBehaviour:
   rotateSpeed: 2000
   groundLayer:
     serializedVersion: 2
-    m_Bits: 10485760
+    m_Bits: 2097152
 --- !u!1 &1271083360372090265
 GameObject:
   m_ObjectHideFlags: 0

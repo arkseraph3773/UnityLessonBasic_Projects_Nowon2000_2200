@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemController : MonoBehaviour, IUseable
+public class ItemController : MonoBehaviour
 {
     public Item item;
     public int num = 1;
@@ -25,17 +25,17 @@ public class ItemController : MonoBehaviour, IUseable
     private Vector3 rendererOffset;
     private float elapsedFixedTime;
     private Vector3 eulerAngleOrigin;
-    private Coroutine coroutine = null;
+    protected Coroutine coroutine = null;
     //====================================================================
     //************************** Public Methods **************************
     //====================================================================
 
-    public void PickUp(Player player)
+    public virtual void PickUp(Player player)
     {
         if (coroutine == null)
         {
             // to do -> 인벤토리에 아이템 추가
-            int remain = InventoryView.instance.GetItemView(item.type).AddItem(item, num);
+            int remain = InventoryView.instance.GetItemView(item.type).AddItem(item, num, null);
             Debug.Log($"플레이어가 아이템 {item.name} {num - remain} 개 획득했습니다");
 
             if (remain <= 0)
@@ -44,10 +44,7 @@ public class ItemController : MonoBehaviour, IUseable
         }
     }
 
-    public virtual void Use()
-    {
-
-    }
+    
 
     //====================================================================
     //************************** Private Methods *************************
@@ -101,7 +98,7 @@ public class ItemController : MonoBehaviour, IUseable
         rendererTransform.eulerAngles = eulerAngleOrigin;
     }
 
-    IEnumerator E_PickUpEffect(Player player)
+    protected IEnumerator E_PickUpEffect(Player player)
     {
         doFloatingEffect = false;
         rb.velocity = Vector3.zero;

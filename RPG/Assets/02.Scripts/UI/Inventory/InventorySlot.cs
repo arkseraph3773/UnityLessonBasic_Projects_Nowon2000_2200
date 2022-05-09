@@ -65,7 +65,7 @@ public class InventorySlot : MonoBehaviour , IPointerDownHandler
     [SerializeField] private Text _numText;
 
     public delegate void OnUse();
-    private OnUse dOnUse;
+    public OnUse dOnUse;
 
     public void SetUp(Item _item, int _num, OnUse useEvent)
     {
@@ -84,9 +84,12 @@ public class InventorySlot : MonoBehaviour , IPointerDownHandler
 
     public void Clear()
     {
-        item = null;
-        num = 0;
+        _item = null;
+        _num = 0;
         dOnUse = null;
+        _numText.text = "";
+        _image.sprite = null;
+
     }
 
     

@@ -26,7 +26,7 @@ public class InventoryItemsView : MonoBehaviour
         }
     }
 
-    public int AddItem(Item item, int itemNum)
+    public int AddItem(Item item, int itemNum, InventorySlot.OnUse useEvent)
     {
         if (itemNum <= 0) 
             return 0;
@@ -61,7 +61,7 @@ public class InventoryItemsView : MonoBehaviour
                 // ºó½½·ÔÀÌ ÀÖÀ¸¸é
                 if (tmpSlot != null)
                 {
-                    return AddItem(item, remain);
+                    return AddItem(item, remain, useEvent);
                 }
                 else
                 {
@@ -78,7 +78,7 @@ public class InventoryItemsView : MonoBehaviour
             // ºó½½·ÔÀÌ ÀÖÀ¸¸é
             if (tmpSlot != null)
             {
-                tmpSlot.SetUp(item, itemNum);
+                tmpSlot.SetUp(item, itemNum, useEvent);
                 remain = 0;
             }
             
