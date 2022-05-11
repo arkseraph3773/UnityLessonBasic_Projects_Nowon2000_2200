@@ -7,6 +7,7 @@ public class PlayerData
     public string nickName;
     public Stats stats;
     public List<InventoryItemData> items;
+    
 
     public PlayerData(string newNickName)
     {
@@ -93,3 +94,13 @@ public class InventoryItemData
     public int num;
     public int slotID;
 }
+
+/*[System.Serializable]
+
+public struct SavePoint
+{
+    public int mapIdx;
+    public float coordx;
+    public float coordy;
+}
+*/
