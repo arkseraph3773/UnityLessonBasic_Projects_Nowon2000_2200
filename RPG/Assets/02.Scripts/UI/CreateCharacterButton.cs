@@ -11,6 +11,7 @@ public class CreateCharacterButton : MonoBehaviour
         if (nickNameField.text.Length > 1)
         {
             PlayerDataManager.CreateData(nickNameField.text);
+            InventoryDataManager.CreateData(nickNameField.text);
             CharacterSelectionView.instance.Refresh();
         }
 

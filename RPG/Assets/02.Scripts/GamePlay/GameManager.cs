@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour
             case GamaState.Idle:
                 break;
             case GamaState.StartLooadAssets:
-                if (PlayerDataManager.instance != null)
+                if (PlayerDataManager.instance != null &&
+                    InventoryDataManager.instance != null)
                 {
                     Next();
                 }

@@ -22,6 +22,23 @@ public class InventoryView : MonoBehaviour
         itemsView_ETC.gameObject.SetActive(false);
     }
 
+    public void SetUp(InventoryData data)
+    {
+        foreach (InventoryItemData item in data.items)
+        {
+            GameObject prefab = ItemAssets.GetItemPrefab(item.itemName);
+            ItemController controller = prefab.GetComponent<ItemController>();
+            IUseable useable = controller as IUseable;
+            InventorySlot.OnUse onUse = null;
+            if (useable != null)
+                onUse = useable.Use;
+
+            GetItemView(item.type).AddItem(controller.item,
+                                    item.num,
+                                    onUse);
+        }
+    }
+
     public InventoryItemsView GetItemView(ItemType itemType)
     {
         InventoryItemsView tmpView = null;

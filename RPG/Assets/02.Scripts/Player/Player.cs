@@ -5,9 +5,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player instance;
+    public Stats stats;
 
     public float hpMax;
     private float _hp;
+
     public float hp
     {
         set
@@ -17,8 +19,9 @@ public class Player : MonoBehaviour
                 value = 0;
                 // do die
             }
-            _hp = value;
 
+            _hp = value;
+            stats.HP = (int)_hp;
             if (PlayerUI.instance != null)
             {
                 PlayerUI.instance.SetHPBar(_hp / hpMax);
@@ -42,7 +45,9 @@ public class Player : MonoBehaviour
                 value = 0;
                 // do die
             }
+
             _mp = value;
+            stats.MP = (int)_mp;
 
             if (PlayerUI.instance != null)
             {
@@ -56,10 +61,66 @@ public class Player : MonoBehaviour
 
     }
 
+    private float _exp;
+    public float exp
+    {
+        set
+        {
+            if (value < 0)
+            {
+                value = 0;
+            }
+
+            _exp = value;
+            stats.EXP = (int)_exp;
+
+            if (PlayerUI.instance != null)
+            {
+                PlayerUI.instance.SetEXPBar(_exp / GetEXPRequired(stats.LV));
+            }
+        }
+        get
+        {
+            return (_exp);
+        }
+    }
+
+    private int _lv;
+    public int lv
+    {
+        set
+        {
+            _lv = value;
+            stats.LV = _lv;
+
+            if (PlayerUI.instance != null)
+            {
+                PlayerUI.instance.SetLVText(_lv.ToString());
+            }
+        }
+        get
+        {
+            return _lv;
+        }
+    }
+
+
     public Transform weapon1Point;
 
     [Header("Àåºñ")]
     public Weapon1 weapon1;
+
+    public void SetUp(PlayerData data)
+    {
+        stats = data.stats;
+        hpMax = stats.HPMax;
+        mpMax = stats.MPMax;
+        hp = stats.HP;
+        mp = stats.MP;
+        lv = stats.LV;
+        exp = stats.EXP;
+    }
+
 
     public bool EquipWeapon1(GameObject weaponPrefab)
     {
@@ -85,11 +146,15 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        _hp = hpMax;
-        _mp = mpMax;
+
 
         //get equioments
         weapon1 = GetComponentInChildren<Weapon1>();
+    }
+
+    private float GetEXPRequired(int level)
+    {
+        return 1000 + (Mathf.Pow(Mathf.Exp(1), level)) * 10;
     }
 
     private void OnTriggerStay(Collider other)
