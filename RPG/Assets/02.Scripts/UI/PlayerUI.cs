@@ -31,4 +31,10 @@ public class PlayerUI : MonoBehaviour
     {
         instance = this;
     }
+
+    private void Start()
+    {
+        if (PlayerDataManager.data != null)
+            SetNickNameText(PlayerDataManager.data.nickName);
+    }
 }

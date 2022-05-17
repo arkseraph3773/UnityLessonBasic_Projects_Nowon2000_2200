@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 인벤토리 데이터를 읽고/쓰고/저장하고/지우는 클래스
+/// </summary>
+
 public class InventoryDataManager
 {
+    #region 싱글톤
     private static InventoryDataManager _instance;
     public static InventoryDataManager instance
     {
@@ -14,9 +19,12 @@ public class InventoryDataManager
             return _instance;
         }
     }
+    #endregion
+    public static string dirPath; // 인벤토리 데이터를 저장할 디렉토리 경로
 
-    public static string dirPath;
-
+    /// <summary>
+    /// 디렉토리 경로 초기화
+    /// </summary>
     public InventoryDataManager()
     {
         dirPath = $"{Application.persistentDataPath}/InventoryData";

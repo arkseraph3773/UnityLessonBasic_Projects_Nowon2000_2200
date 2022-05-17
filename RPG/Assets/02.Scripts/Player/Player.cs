@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player instance;
+    public static bool isReady;
+
     public Stats stats;
 
     public float hpMax;
@@ -119,6 +121,8 @@ public class Player : MonoBehaviour
         mp = stats.MP;
         lv = stats.LV;
         exp = stats.EXP;
+
+        isReady = true;
     }
 
 
