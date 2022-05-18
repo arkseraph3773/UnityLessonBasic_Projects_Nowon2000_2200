@@ -29,13 +29,27 @@ public class InventorySlot : MonoBehaviour , IPointerDownHandler
     {
         set
         {
-            _num = value;
-            if (_num > 1)
-                _numText.text = _num.ToString();
-            else if (_num == 1)
-                _numText.text = "";
-            else
-                Clear();
+            if (_num != value)
+            {
+                _num = value;
+
+                if (StageManager.state != StageState.SetUpPlayer)
+                {
+                    InventoryDataManager.data.SetItemData(_item.type, _item.name, _num, id);
+                    InventoryDataManager.SaveData();
+                }
+
+                if (_num > 1)
+                    _numText.text = _num.ToString();
+                else if (_num == 1)
+                    _numText.text = "";
+                else
+                {
+                    Clear();
+                }
+            }
+
+            
         }
         get
         {
@@ -71,9 +85,9 @@ public class InventorySlot : MonoBehaviour , IPointerDownHandler
     {
         if (_item != null)
         {
-            num = _num;
-            item = _item;
             dOnUse = useEvent;
+            item = _item;
+            num = _num;
         }
         else
         {

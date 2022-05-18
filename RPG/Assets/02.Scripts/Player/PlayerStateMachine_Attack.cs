@@ -26,6 +26,7 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
     {
         if (comboCount == 0 &&
             (manager.playerState == PlayerState.Move &&
+            Player.instance.weapon1 != null &&
              playerAnimator.IsClipPlaying("Movement")))
             return true;
         return false;

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1166216524585262959}
-  - component: {fileID: 1166216524593017129}
   - component: {fileID: 6898195072633480229}
   - component: {fileID: 1166216524585747214}
   - component: {fileID: 1166216524585747205}
@@ -40,25 +39,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1166216524593017129
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1166216524585747215}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a5674d01884853d4e8f2386a171e14d9, type: 3}
-  m_Controller: {fileID: 9100000, guid: 77ceccaba794a9f40923d54169e977c9, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!143 &6898195072633480229
 CharacterController:
   m_ObjectHideFlags: 0
@@ -90,7 +70,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerState: 0
-  cam: {fileID: 0}
 --- !u!114 &1166216524585747205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,6 +82,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad9803c048f6de0479003861fc8c2e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats:
+    LV: 0
+    EXP: 0
+    STR: 0
+    DEX: 0
+    INT: 0
+    LUK: 0
+    HP: 0
+    HPMax: 0
+    MP: 0
+    MPMax: 0
+    ATK: 0
+    DEF: 0
+    statPoint: 0
   hpMax: 1000
   mpMax: 100
   weapon1Point: {fileID: 6898195071845147695}
@@ -242,6 +235,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: a5674d01884853d4e8f2386a171e14d9, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 77ceccaba794a9f40923d54169e977c9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5674d01884853d4e8f2386a171e14d9, type: 3}
 --- !u!4 &6898195071845147623 stripped
