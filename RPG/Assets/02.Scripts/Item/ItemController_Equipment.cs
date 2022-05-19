@@ -9,7 +9,6 @@ public class ItemController_Equipment : ItemController, IUseable
     {
         InventoryView.instance.GetItemView(ItemType.Equip).Remove(item, 1);
         Player.instance.Equip(equipmentType, equipmentPrefab);
-        
     }
     public override void PickUp(Player player)
     {

@@ -48,7 +48,8 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
                 break;
             case State.Casting:
 
-                if (playerAnimator.IsClipPlaying(GetClipName()))
+                if (playerAnimator.IsClipPlaying(GetClipName()) && 
+                    comboTimer < GetComboTime() / 1.5)
                 {
                     comboCount++;
                     playerAnimator.SetInt("attackComboCount", comboCount);
@@ -64,28 +65,33 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
                     Player.instance.weapon1.doCasting = false;
                     state++;
                 }
+                else
+                {
+                    comboTimer -= Time.deltaTime;
+                }
                 break;
             case State.OnAction:
 
+                if (comboTimer < GetComboTime() / 2)
+                {
+                    state++;
+
+                }
                 // 마우스입력 들어오면 그다음 콤보 실행 
                 // 안들어오면 무브먼트로 돌아감
 
                 if (Input.GetMouseButton(0))
                 {
-                    if (comboTimer < 0.6f &&
+                    if (comboTimer < GetComboTime() / 1.9 &&
                         comboCount < 3)
                     {
                         state = State.Prepare;
+                        comboCount++;
                     }
                 }
 
-                if (comboTimer < 0.5f)
-                {
-                    if (state != State.Prepare)
-                    {
-                        state++;
-                    }
-                }
+                
+                comboTimer -= Time.deltaTime;
                 break;
             case State.Finish:
                 nextState = PlayerState.Move;

@@ -47,9 +47,10 @@ public class InventoryItemHandler : MonoBehaviour
             if (results.Count > 0)
             {
                 bool isSlotExist = false;
-                // item Slot 있는지
+                
                 foreach (var result in results)
-                {
+                {   
+                    // item Slot 있는지
                     if (result.gameObject.TryGetComponent(out InventorySlot slot))
                     {
                         // 슬롯번호와 슬롯에 있는 아이템이름 같으면 아무것도 하지않음
@@ -71,6 +72,21 @@ public class InventoryItemHandler : MonoBehaviour
                         }
                         isSlotExist = true;
                         break;
+                    }
+                    // EquipmentSlot있는지
+                    if (_slot.item.type == ItemType.Equip && 
+                        result.gameObject.TryGetComponent(out EquipmentSlot equipmentSlot))
+                    {
+                        
+                        if (ItemAssets.GetItemPrefab(_slot.item.name).TryGetComponent(out ItemController_Equipment controller))
+                        {
+                            // 동일한 종류의 장비를 장착하려고 한건지 체크
+                            if (equipmentSlot.equipmentType == controller.equipmentType)
+                            {
+                                _slot.dOnUse();
+                            }
+                        }
+                        
                     }
                 }
                 // 슬롯 감지 안됨
