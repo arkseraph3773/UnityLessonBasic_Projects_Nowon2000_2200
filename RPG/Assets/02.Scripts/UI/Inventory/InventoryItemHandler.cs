@@ -30,6 +30,15 @@ public class InventoryItemHandler : MonoBehaviour
         _eventSystem = transform.parent.GetComponent<EventSystem>();
     }
 
+    private void OnEnable()
+    {
+        CursorHandler.controllable = false;
+    }
+    private void OnDisable()
+    {
+        CursorHandler.controllable = true;
+    }
+
     private void Update()
     {
         // 마우스 왼쪽버튼
@@ -74,7 +83,8 @@ public class InventoryItemHandler : MonoBehaviour
                         break;
                     }
                     // EquipmentSlot있는지
-                    if (_slot.item.type == ItemType.Equip && 
+                    if (_slot.item != null &&
+                        _slot.item.type == ItemType.Equip && 
                         result.gameObject.TryGetComponent(out EquipmentSlot equipmentSlot))
                     {
                         

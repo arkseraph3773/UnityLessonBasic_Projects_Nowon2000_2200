@@ -61,11 +61,11 @@ public class EquipmentSlot : MonoBehaviour, IPointerDownHandler
         {
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                /*if (InventoryItemHandler.instance.gameObject.activeSelf == false)
+                if (EquipmentHandler.instance.gameObject.activeSelf == false)
                 {
-                    InventoryItemHandler.instance.SetUp(this, _item.icon);
-                    InventoryItemHandler.instance.gameObject.SetActive(true);
-                }*/
+                    EquipmentHandler.instance.SetUp(this, _item.icon);
+                    EquipmentHandler.instance.gameObject.SetActive(true);
+                }
             }
             else if (eventData.button == PointerEventData.InputButton.Right)
             {

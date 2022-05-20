@@ -160,6 +160,21 @@ public class Player : MonoBehaviour
         return false;
     }
 
+    public bool Unequip(EquipmentType equipmentType, InventorySlot slot)
+    {
+        if (CheakIsEquipmentExist(equipmentType))
+        {
+            GameObject equipment = GetEquipPoint(equipmentType).GetChild(0).gameObject;
+            ItemController_Equipment controller = equipment.GetComponent<Equipment>().controller;
+            if (slot.isItemExist == false)
+            {
+                slot.SetUp(controller.item, 1, controller.Use);
+                return true;
+            }
+            
+        }
+        return false;
+    }
 
     private void Awake()
     {

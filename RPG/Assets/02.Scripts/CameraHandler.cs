@@ -36,6 +36,9 @@ public class CameraHandler : MonoBehaviour
     private void Update()
     {
         if (target == null) return;
+
+        //if (Cursor.visible) return;
+
         // 마우스 좌우입력
         x += Input.GetAxis("Mouse X") * xPointSpeed * Time.deltaTime;
         // 마우스 상하입력
@@ -54,6 +57,8 @@ public class CameraHandler : MonoBehaviour
     private void LateUpdate()
     {
         if(target == null) return;
+
+        //if (Cursor.visible) return;
 
         tr.position = tr.rotation * new Vector3(0, 0, -distance) + target.position;
     }
