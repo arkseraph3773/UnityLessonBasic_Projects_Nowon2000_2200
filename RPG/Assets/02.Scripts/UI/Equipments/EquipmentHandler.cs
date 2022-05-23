@@ -16,6 +16,8 @@ public class EquipmentHandler : MonoBehaviour
     private PointerEventData _pointerEventData; // 마우스 이벤트 데이터
     private EventSystem _eventSystem; // 이벤트를 처리하는 객체
 
+    private Coroutine _coroutine;
+
     private void Awake()
     {
         if (instance != null)
@@ -40,7 +42,9 @@ public class EquipmentHandler : MonoBehaviour
     private void Update()
     {
         // 마우스 왼쪽버튼
-        if (Input.GetKeyDown(KeyCode.Mouse0)) // GetMouseButtonDown(0)
+        if (_slot != null && 
+            Input.GetKeyDown(KeyCode.Mouse0) && 
+            InventoryItemHandler.instance.gameObject.activeSelf == false) // GetMouseButtonDown(0)
         {
             // 발생할 이벤트에 대한 마우스 이벤트 데이터
             _pointerEventData = new PointerEventData(_eventSystem); // 현재 이벤트에서 마우스 이벤트 데이터만 따로 생성
@@ -69,6 +73,8 @@ public class EquipmentHandler : MonoBehaviour
                                 if(Player.instance.Unequip(_slot.equipmentType))
                                 {
                                     _slot.Clear();
+                                    Clear();
+                                    return;
                                 }
                             }
                             else
@@ -80,6 +86,8 @@ public class EquipmentHandler : MonoBehaviour
                                     if (_slot.equipmentType == controller.equipmentType)
                                     {
                                         inventorySlot.dOnUse();
+                                        Clear();
+                                        return;
                                     }
                                 }
                             }
@@ -112,6 +120,16 @@ public class EquipmentHandler : MonoBehaviour
     public void Clear()
     {
         SetUp(null, null);
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
+        _coroutine = StartCoroutine(E_DeactiveAfterEnfOfFrame());
+
+    }
+
+    private IEnumerator E_DeactiveAfterEnfOfFrame()
+    {
+        yield return new WaitForEndOfFrame();
         gameObject.SetActive(false);
     }
+
 }

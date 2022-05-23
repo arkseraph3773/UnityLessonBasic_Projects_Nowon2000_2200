@@ -111,7 +111,8 @@ public class InventorySlot : MonoBehaviour , IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (isItemExist)
+        if (isItemExist && 
+            EquipmentHandler.instance.gameObject.activeSelf == false)
         {
             if (eventData.button == PointerEventData.InputButton.Left)
             {

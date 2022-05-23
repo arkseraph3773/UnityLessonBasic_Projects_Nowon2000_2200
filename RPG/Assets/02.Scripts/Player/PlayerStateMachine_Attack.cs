@@ -13,8 +13,7 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
     private int comboCount;
     private Coroutine comboCoroutine = null;
     public float damage = 10f;
-    
-    
+
     private void Start()
     {
         combo1Time = playerAnimator.GetClipTime("Attack_Combo1");
@@ -26,7 +25,7 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
     {
         if (comboCount == 0 &&
             (manager.playerState == PlayerState.Move &&
-            Player.instance.weapon1 != null &&
+             Player.instance.weapon1 != null &&
              playerAnimator.IsClipPlaying("Movement")))
             return true;
         return false;
@@ -47,14 +46,13 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
                 state++;
                 break;
             case State.Casting:
-
-                if (playerAnimator.IsClipPlaying(GetClipName()) && 
+                if (playerAnimator.IsClipPlaying(GetClipName()) &&
                     comboTimer < GetComboTime() / 1.5)
                 {
                     comboCount++;
                     playerAnimator.SetInt("attackComboCount", comboCount);
 
-                    //Debug.Log($"Attack : detected target count: {weapon.GetTargets().Count}");
+                    Debug.Log($"Attack : detected target count: {Player.instance.weapon1.GetTargets().Count}");
                     // 캐스팅 동안 무기에 닿은 모든 타겟 가져옴
                     foreach (var target in Player.instance.weapon1.GetTargets())
                     {
@@ -66,12 +64,9 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
                     state++;
                 }
                 else
-                {
                     comboTimer -= Time.deltaTime;
-                }
                 break;
             case State.OnAction:
-
                 // 마우스입력 들어오면 그다음 콤보 실행 
                 // 안들어오면 무브먼트로 돌아감
 
@@ -81,9 +76,9 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
                         comboTimer < GetComboTime() * 0.2f)
                     {
                         state = State.Prepare;
-                        comboCount++;
                     }
                 }
+
                 if (comboTimer < 0)
                 {
                     if (state != State.Prepare)
@@ -92,7 +87,6 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
                     }
                 }
 
-                
                 comboTimer -= Time.deltaTime;
                 break;
             case State.Finish:
@@ -124,7 +118,7 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
             return combo3Time;
         else
         {
-            //Debug.LogError("Attack machine : 콤보 애니메이션 시간을 가져오는데 문제가 있습니다.");
+            Debug.LogError("Attack machine : 콤보 애니메이션 시간을 가져오는데 문제가 있습니다.");
             return -1f;
         }
     }
@@ -139,7 +133,7 @@ public class PlayerStateMachine_Attack : PlayerStateMachine
             return "Attack_Combo3";
         else
         {
-            //Debug.LogError("Attack machine : 콤보 애니메이션 이름을 가져오는데 문제가 있습니다.");
+            Debug.LogError("Attack machine : 콤보 애니메이션 이름을 가져오는데 문제가 있습니다.");
             return "";
         }
     }
