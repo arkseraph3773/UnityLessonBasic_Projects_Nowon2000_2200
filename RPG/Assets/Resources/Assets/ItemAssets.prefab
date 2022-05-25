@@ -48,8 +48,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 843da5b0dbf24574691c2bc2f482801e, type: 2}
   - {fileID: 11400000, guid: 065e8ec926709c3488051e3620799fa8, type: 2}
   - {fileID: 11400000, guid: 3d6a5e91d71fa6d488f5233266f9fb6f, type: 2}
+  - {fileID: 11400000, guid: 3bd745aea9e743241bd7d2c7a2e393e0, type: 2}
+  - {fileID: 11400000, guid: 739655d7ac2df544bae127a8b2eb530a, type: 2}
+  - {fileID: 11400000, guid: 4566831bfafd9e040b876e492a04a828, type: 2}
   itemPrefabs:
   - {fileID: 1271083360198915298, guid: d33335ed2d6460e4b844eb58ec6a4e8e, type: 3}
   - {fileID: 1271083360198915298, guid: 01e898389fcbf774e8931d2f64fe2603, type: 3}
   - {fileID: 1271083360198915298, guid: b81c5b0ae6e1f0d40b119b84e37d0c8e, type: 3}
   - {fileID: 1271083360198915298, guid: 81361061e4d1763498b0e671d8bb6b79, type: 3}
+  - {fileID: 2767021400858781209, guid: f9cfd51ce46f25c40a6bdba8e03b936d, type: 3}
+  - {fileID: 7464018459837846151, guid: 2675556ea391a704792073f890c29a72, type: 3}
+  - {fileID: 3192761489658270479, guid: 8298690fdec9e17419a48fc7e2f87f15, type: 3}

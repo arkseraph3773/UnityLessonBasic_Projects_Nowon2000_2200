@@ -39,6 +39,8 @@ public class EquipmentSlot : MonoBehaviour, IPointerDownHandler
         if (_item != null)
         {
             item = _item;
+            InventoryDataManager.data.SetEquipmentItemData(equipmentType, _item.name);
+            InventoryDataManager.SaveData();
         }
         else
         {
@@ -51,6 +53,8 @@ public class EquipmentSlot : MonoBehaviour, IPointerDownHandler
     {
         _item = null;
         _image.sprite = null;
+        InventoryDataManager.data.RemoveEquipmentItemData(equipmentType);
+        InventoryDataManager.SaveData();
     }
 
 

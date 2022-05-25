@@ -27,9 +27,9 @@ public class InventoryView : MonoBehaviour
     /// 현재 플레이어의 인벤토리 데이터로 인벤토리를 세팅함
     /// </summary>
     /// <param name="data"></param>
-    public void SetUp(InventoryData data)
+    public void SetUp(List<InventoryItemData> itemsData)
     {
-        foreach (InventoryItemData item in data.items)
+        foreach (InventoryItemData item in itemsData)
         {
             GameObject prefab = ItemAssets.GetItemPrefab(item.itemName); // 아이템 에셋 가져옴
             ItemController controller = prefab.GetComponent<ItemController>(); // 아이템 에셋의 Controller 컴포넌트
@@ -42,8 +42,8 @@ public class InventoryView : MonoBehaviour
 
             // 해당 아이템 타입에 맞는 인벤토리에 아이템을 추가함
             GetItemView(item.type).AddItem(controller.item,
-                                    item.num,
-                                    onUse);
+                                           item.num,
+                                           onUse);
         }
 
         isReady = true;

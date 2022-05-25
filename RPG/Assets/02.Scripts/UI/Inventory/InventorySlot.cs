@@ -99,12 +99,14 @@ public class InventorySlot : MonoBehaviour , IPointerDownHandler
 
     public void Clear()
     {
+        if (_item != null)
+            InventoryDataManager.data.RemoveItemData(_item.type, _item.name, id);
+
         _item = null;
         _num = 0;
         dOnUse = null;
         _numText.text = "";
         _image.sprite = null;
-
     }
 
     

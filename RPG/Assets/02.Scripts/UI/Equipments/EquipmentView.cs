@@ -14,6 +14,14 @@ public class EquipmentView : MonoBehaviour
     [SerializeField] private EquipmentSlot ringSlot;
     [SerializeField] private EquipmentSlot necklaceSlot;
 
+    public void SetUp(List<EquipmentItemData> itemsData)
+    {
+        foreach (var item in itemsData)
+        {
+            SetSlot(item.type, ItemAssets.GetItem(item.itemName));
+        }
+    }
+
     public void SetSlot(EquipmentType equipmentType, Item item)
     {
         switch (equipmentType)
