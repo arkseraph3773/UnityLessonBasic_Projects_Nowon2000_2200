@@ -84,6 +84,7 @@ public class InventoryData
                 itemName = itemName
 
             };
+            equipItems.Add(tmpData);
         }
 
         

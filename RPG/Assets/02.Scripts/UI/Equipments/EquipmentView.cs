@@ -18,7 +18,8 @@ public class EquipmentView : MonoBehaviour
     {
         foreach (var item in itemsData)
         {
-            SetSlot(item.type, ItemAssets.GetItem(item.itemName));
+            GameObject equipment = ItemAssets.GetItemPrefab(item.itemName).GetComponent<ItemController_Equipment>().equipmentPrefab;
+            Player.instance.Equip(item.type, equipment);
         }
     }
 
