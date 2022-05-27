@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InventoryItemsView : MonoBehaviour
 {
+    
+    public CMDState CMDState;
     public ItemType itemType;
     public Transform content;
     public int totalSlotNumber = 12;
@@ -26,6 +28,7 @@ public class InventoryItemsView : MonoBehaviour
             tmpSlot.itemType = itemType;
             slots.Add(tmpSlot);
         }
+        CMDState = CMDState.Ready;
     }
 
     public int AddItem(Item item, int itemNum, InventorySlot.OnUse useEvent)

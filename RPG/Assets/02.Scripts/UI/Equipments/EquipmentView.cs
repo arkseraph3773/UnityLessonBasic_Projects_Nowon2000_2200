@@ -5,6 +5,7 @@ using UnityEngine;
 public class EquipmentView : MonoBehaviour
 {
     public static EquipmentView instance;
+    public CMDState CMDState;
 
     [SerializeField] private EquipmentSlot headSlot;
     [SerializeField] private EquipmentSlot bodySlot;
@@ -57,5 +58,8 @@ public class EquipmentView : MonoBehaviour
         if (instance != null)
             Destroy(instance);
         instance = this;
+        gameObject.SetActive(false);
+
+        CMDState = CMDState.Ready;
     }
 }

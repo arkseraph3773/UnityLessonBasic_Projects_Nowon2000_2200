@@ -49,17 +49,27 @@ public class StageManager : MonoBehaviour
                                      playerSpawnPoint.position, 
                                      Quaternion.identity).GetComponent<Player>();
                 player.SetUp(PlayerDataManager.data);
-                InventoryView.instance.SetUp(InventoryDataManager.data.items);
-                EquipmentView.instance.SetUp(InventoryDataManager.data.equipItems);
+               
                 Next();
                 break;
             // 플레이어 및 인벤토리 세팅 끝날때까지 기다림
             case StageState.WaitForPlayerSetUp:
-                if (Player.isReady &&
-                    InventoryView.isReady)
+                if (Player.isReady)
                 {
                     Next();
                 }
+                break;
+            case StageState.SetUpUI:
+                if (InGameUIManager.instance.CMDState == CMDState.Ready)
+                {
+                    InventoryView.instance.SetUp(InventoryDataManager.data.items);
+                    EquipmentView.instance.SetUp(InventoryDataManager.data.equipItems);
+                    StatsView.instance.SetUp();
+                    Next();
+                }
+                break;
+            case StageState.WaitForUISetUp:
+                Next();
                 break;
             // 스테이지 시작
             case StageState.StartStage:
@@ -82,6 +92,8 @@ public enum StageState
     WaitForMapSetUpFinished,
     SetUpPlayer,
     WaitForPlayerSetUp,
+    SetUpUI,
+    WaitForUISetUp,
     StartStage,
     OnStage,
 }

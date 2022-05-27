@@ -206,8 +206,11 @@ public class Player : MonoBehaviour
                 break;
         }
 
+        Equipment component = equipmentPrefab.GetComponent<Equipment>();
+        additionalStats += component.additionalStats;
+
         EquipmentView.instance.SetSlot(equipmentType,
-                                       equipmentPrefab.GetComponent<Equipment>().controller.item);
+                                      component.controller.item);
         return true;
     }
 
@@ -244,7 +247,11 @@ public class Player : MonoBehaviour
                 default:
                     break;
             }
-            ItemController_Equipment controller = equipment.GetComponent<Equipment>().controller;
+
+            Equipment component = equipment.GetComponent<Equipment>();
+            additionalStats -= component.additionalStats;
+
+            ItemController_Equipment controller = component.controller;
             int remain = InventoryView.instance.GetItemView(ItemType.Equip).AddItem(controller.item, 1, controller.Use);
             // 장비해제 성공
             if (remain <= 0)
