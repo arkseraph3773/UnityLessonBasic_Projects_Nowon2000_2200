@@ -643,6 +643,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: -7782312048978583168, guid: 8298690fdec9e17419a48fc7e2f87f15,
     type: 3}
+  additionalStats:
+    LV: 0
+    EXP: 0
+    STR: 0
+    DEX: 0
+    INT: 0
+    LUK: 0
+    HP: 0
+    HPMax: 10
+    MP: 0
+    MPMax: 0
+    ATK: 0
+    DEF: 15
+    statPoint: 0
 --- !u!1 &3192761489658270489
 GameObject:
   m_ObjectHideFlags: 0

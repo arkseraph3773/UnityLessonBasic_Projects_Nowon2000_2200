@@ -11,7 +11,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] private GameObject statsView;
     [SerializeField] private GameObject inventoryView;
     [SerializeField] private GameObject equipmentView;
-
+    [SerializeField] private GameObject talkBox;
     
 
     private void Awake()
@@ -30,6 +30,7 @@ public class InGameUIManager : MonoBehaviour
         statsView.SetActive(true); 
         inventoryView.SetActive(true);
         equipmentView.SetActive(true);
+        talkBox.SetActive(true);
 
         yield return new WaitUntil(() => StatsView.instance != null &&
                                          InventoryView.instance != null &&

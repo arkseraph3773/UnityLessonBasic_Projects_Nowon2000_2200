@@ -7,6 +7,35 @@ public class Player : MonoBehaviour
     public static Player instance;
     public static bool isReady;
 
+    private static CMDState _CMDState;
+    public static CMDState CMDState
+    {
+        set
+        {
+            _CMDState = value;
+            switch (_CMDState)
+            {
+                case CMDState.Idle:
+                    break;
+                case CMDState.Ready:
+                    instance._machineManager.controllable = true;
+                    break;
+                case CMDState.Busy:
+                    instance._machineManager.controllable = false;
+                    break;
+                case CMDState.Error:
+                    instance._machineManager.controllable = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+        get
+        {
+            return _CMDState;
+        }
+    }
+
     private Stats _stats;
     public Stats stats
     {
@@ -159,6 +188,7 @@ public class Player : MonoBehaviour
     public Ring ring;
     public Necklace necklace;
 
+    private PlayerStateMachineManager _machineManager;
     public void SetUp(PlayerData data)
     {
         stats = data.stats;
@@ -316,7 +346,9 @@ public class Player : MonoBehaviour
 
         //get equioments
         weapon1 = GetComponentInChildren<Weapon1>();
+        _machineManager = GetComponent<PlayerStateMachineManager>();
     }
+
 
     private float GetEXPRequired(int level)
     {
