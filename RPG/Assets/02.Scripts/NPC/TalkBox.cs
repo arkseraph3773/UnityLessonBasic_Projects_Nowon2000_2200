@@ -20,6 +20,7 @@ public class TalkBox : MonoBehaviour
         if (IE != null)
         {
             interactButton.onClick.AddListener(() => IE());
+            interactButton.onClick.AddListener(() => FinishTalk());
             interactButton.transform.GetChild(0).GetComponent<Text>().text = interactEventName;
         }
     }
@@ -31,13 +32,22 @@ public class TalkBox : MonoBehaviour
 
     public void Clear()
     {
+        if (currentNPC != null)
+        {
+            currentNPC.CMDState = CMDState.Ready;
+        }
+
         currentNPC = null;
-        IE = null;
+
         if (IE != null)
         {
-            interactButton.onClick.RemoveListener(() => IE());
+            interactButton.onClick.RemoveAllListeners();
             interactButton.transform.GetChild(0).GetComponent<Text>().text = string.Empty;
         }
+
+        IE = null;
+        
+        gameObject.SetActive(false);
     }
 
     public void ShowRandomTalk()
@@ -64,11 +74,14 @@ public class TalkBox : MonoBehaviour
 
     private void OnEnable()
     {
-        Player.CMDState = CMDState.Busy;
+        
+        CursorHandler.ShowCursor();
     }
 
     private void OnDisable()
     {
-        Player.CMDState = CMDState.Ready;
+        if (InGameUIManager.instance != null &&
+            InGameUIManager.instance.GetActiveUICount() <= 0)
+            CursorHandler.HideCursor();
     }
 }

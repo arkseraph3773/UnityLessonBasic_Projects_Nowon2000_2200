@@ -51,7 +51,7 @@ public class CursorHandler : MonoBehaviour
 
     
 
-    private void HideCursor()
+    public static void HideCursor()
     {
         if (Cursor.visible)
             Cursor.visible = false;
@@ -59,15 +59,21 @@ public class CursorHandler : MonoBehaviour
         if (Cursor.lockState != CursorLockMode.Locked)
             Cursor.lockState = CursorLockMode.Locked;
 
+        if (Player.instance != null)
+            Player.CMDState = CMDState.Ready;
+
     }
 
-    private void ShowCursor()
+    public static void ShowCursor()
     {
         if (Cursor.visible == false)
             Cursor.visible = true;
+
         if (Cursor.lockState != CursorLockMode.Confined)
             Cursor.lockState = CursorLockMode.Confined;
 
+        if (Player.instance != null)
+            Player.CMDState = CMDState.Busy;
     }
 
 }
