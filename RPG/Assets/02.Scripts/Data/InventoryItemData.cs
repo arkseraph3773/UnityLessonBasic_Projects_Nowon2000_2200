@@ -8,6 +8,7 @@ using UnityEngine;
 [System.Serializable] // json포맷 등으로 직렬화/역직렬화 할수있게 하기위한 속성
 public class InventoryItemData
 {
+    public string key;
     public ItemType type; // (장비, 소비, 기타)
     public string itemName; // 이름
     public int num; // 보유 갯수

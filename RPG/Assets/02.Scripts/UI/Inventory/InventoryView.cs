@@ -56,10 +56,12 @@ public class InventoryView : MonoBehaviour
             if (useable != null)
                 onUse = useable.Use;
 
+            Item item = new Item(controller.item, itemsData[i].key);
+
             // 해당 아이템 타입에 맞는 인벤토리에 아이템을 추가함
-            GetItemView(itemsData[i].type).AddItem(controller.item,
-                                           itemsData[i].num,
-                                           onUse);
+            GetItemView(itemsData[i].type).AddItem(item,
+                                                   itemsData[i].num,
+                                                   onUse);
         }
 
         /*foreach (InventoryItemData item in itemsData)

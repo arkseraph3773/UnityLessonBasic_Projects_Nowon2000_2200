@@ -2,6 +2,7 @@
 
 public class ItemController_Equipment : ItemController, IUseable
 {
+    
     public EquipmentType equipmentType;
     public GameObject equipmentPrefab;
 
@@ -22,6 +23,11 @@ public class ItemController_Equipment : ItemController, IUseable
                 coroutine = StartCoroutine(E_PickUpEffect(player));
 
         }
+    }
+
+    private void Awake()
+    {
+        
     }
 }
 

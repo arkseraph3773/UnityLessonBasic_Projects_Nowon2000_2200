@@ -57,6 +57,7 @@ public class ItemController : MonoBehaviour
         rendererTransform = transform.Find("Renderer");
         rendererOffset = rendererTransform.localPosition;
         eulerAngleOrigin = rendererTransform.eulerAngles;
+        Debug.Log($"Item  controller awake {rb}, {col}, {rendererTransform}");
     }
 
     private void OnEnable()
