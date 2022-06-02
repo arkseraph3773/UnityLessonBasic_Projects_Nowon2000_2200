@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class Weapon1 : Equipment
 {
-    
-
     public LayerMask targetLayer;
+    [SerializeField] private TrailRenderer trailRenderer;
 
     private bool _doCasting;
     public bool doCasting
@@ -17,7 +16,16 @@ public class Weapon1 : Equipment
             if (value == false)
             {
                 targets.Clear();
+                if (trailRenderer != null)
+                    trailRenderer.enabled = false;
+
             }
+            else
+            {
+                if (trailRenderer != null)
+                    trailRenderer.enabled = true;
+            }
+
             _doCasting = value;
         }
     }
