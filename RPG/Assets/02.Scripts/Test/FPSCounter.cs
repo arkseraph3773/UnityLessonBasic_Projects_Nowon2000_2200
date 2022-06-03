@@ -14,4 +14,5 @@ public class FPSCounter : MonoBehaviour
 
         FPSText.text = Mathf.Ceil(fps).ToString();
     }
+
 }
